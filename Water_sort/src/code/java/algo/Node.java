@@ -26,6 +26,7 @@ public class Node {
             WaterBottle wb1 = this.water_bottles[i];
             System.out.println("get children");
             for(int j=i+1;j<this.water_bottles.length;j++){
+                System.out.println("get children inner");
                 WaterBottle wb2 = this.water_bottles[j];
                 Node one = this.get_child(wb1, wb2, i, j);
                 Node two = this.get_child(wb2, wb1, j, i);
@@ -33,6 +34,7 @@ public class Node {
                 if (two != null) res.add(two);
             }
         }
+        System.out.println(res);
         return res;
     }
 
@@ -41,7 +43,10 @@ public class Node {
         WaterBottle wb1_temp = wb1.clone();
         WaterBottle wb2_temp = wb2.clone();
         String operator = "pour_"+wb1.id+"_"+wb2.id;
+        System.out.println(operator);
         while (wb1_temp.isInsertable(wb2_temp)) {
+            System.out.println("isInsertable");
+            System.out.println(wb1+"--"+wb2);
             WaterBottle[] waterBottles = this.pour(wb1, wb2);
             wb1_temp = waterBottles[0];
             wb2_temp = waterBottles[1];
