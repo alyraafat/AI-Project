@@ -1,6 +1,7 @@
 package algo;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class Node {
     Node parent;
@@ -20,7 +21,7 @@ public class Node {
         this.path = parent == null ? "" : (parent.path.isEmpty() ? this.operator: parent.path + "," + this.operator);
     }
 
-    public ArrayList<Node> get_children(){
+    public ArrayList<Node> get_children(Function<Integer, Integer> evalFunc){
         ArrayList<Node> res = new ArrayList<>();
         for(int i=0;i<this.water_bottles.length;i++){
             WaterBottle wb1 = this.water_bottles[i];
@@ -29,9 +30,9 @@ public class Node {
 //                System.out.println("get children inner");
                 WaterBottle wb2 = this.water_bottles[j];
 //                System.out.println("Node one");
-                Node one = this.get_child(wb1, wb2, i, j);
+                Node one = this.get_child(wb1, wb2, i, j, evalFunc);
 //                System.out.println("Node two");
-                Node two = this.get_child(wb2, wb1, j, i);
+                Node two = this.get_child(wb2, wb1, j, i, evalFunc);
                 if (one != null) res.add(one);
                 if (two != null) res.add(two);
             }
@@ -40,8 +41,8 @@ public class Node {
         return res;
     }
 
-    public Node get_child(WaterBottle wb1, WaterBottle wb2, int i, int j){
-        int new_cost = 0;
+    public Node get_child(WaterBottle wb1, WaterBottle wb2, int i, int j, Function<Integer, Integer> evalFunc){
+        int layersPoured = 0;
         WaterBottle wb1_temp = wb1.clone();
         WaterBottle wb2_temp = wb2.clone();
         String operator = "pour_"+wb1.id+"_"+wb2.id;
@@ -52,14 +53,14 @@ public class Node {
             WaterBottle[] waterBottles = this.pour(wb1_temp, wb2_temp);
             wb1_temp = waterBottles[0];
             wb2_temp = waterBottles[1];
-            new_cost++;
+            layersPoured++;
         }
-        if(new_cost>0){
+        if(layersPoured>0){
             WaterBottle[] newWaterBottles = this.water_bottles.clone();
             newWaterBottles[i] = wb1_temp;
             newWaterBottles[j] = wb2_temp;
-
-            return new Node(this, this.cost+new_cost, this.depth+1, operator, newWaterBottles);
+            int addedCost = evalFunc.apply(layersPoured);
+            return new Node(this, this.cost+addedCost, this.depth+1, operator, newWaterBottles);
         }
         return null;
     }

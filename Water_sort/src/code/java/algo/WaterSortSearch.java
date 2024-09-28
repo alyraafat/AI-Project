@@ -1,8 +1,5 @@
 package algo;
 
-import java.util.ArrayList;
-import java.util.function.Function;
-
 public class WaterSortSearch extends GenericSearch{
 
     public boolean goalFunc(Node n){
@@ -36,7 +33,7 @@ public class WaterSortSearch extends GenericSearch{
 
     public QingFun decodeStrategy(String strategy){
         switch(strategy.toLowerCase()){
-            default: return new BFSQueue();
+            default: return new BFS();
         }
     }
 

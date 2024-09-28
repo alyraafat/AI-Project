@@ -3,10 +3,10 @@ package algo;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BFSQueue extends QingFun{
+public class BFS extends QingFun{
     Queue<Node> q;
 
-    public BFSQueue(){
+    public BFS(){
         this.q = new LinkedList<>();
     }
 
@@ -20,5 +20,9 @@ public class BFSQueue extends QingFun{
 
     public boolean isEmpty(){
         return q.isEmpty();
+    }
+
+    public int evalFunc(int layersPoured){
+        return layersPoured;
     }
 }

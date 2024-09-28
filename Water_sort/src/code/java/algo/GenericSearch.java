@@ -17,7 +17,7 @@ public abstract class GenericSearch {
 //            System.out.println("here2");
             if(this.goalFunc(currNode)) return currNode;
 //            System.out.println("here3");
-            ArrayList<Node> children = currNode.get_children();
+            ArrayList<Node> children = currNode.get_children(qingFun::evalFunc);
 //            System.out.println("here4");
             this.nodesExpanded += 1;
 //            System.out.println("here5");
