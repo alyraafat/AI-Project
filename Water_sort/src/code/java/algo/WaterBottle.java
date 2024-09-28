@@ -2,7 +2,6 @@ package algo;
 
 public class WaterBottle {
     String[] colors;
-    String color_str;
     int capacity;
     boolean isSameColor;
     int id;
@@ -10,7 +9,6 @@ public class WaterBottle {
 
     public WaterBottle(String color_str, int capacity, int id){
         this.colors = color_str.split(",");
-        this.color_str = color_str;
         this.capacity = capacity;
         this.top_color_idx = this.lastColorIdx();
         this.isSameColor = this.checkSameColor();
@@ -19,7 +17,6 @@ public class WaterBottle {
 
     public WaterBottle(WaterBottle wb){
         this.colors = wb.colors.clone();
-        this.color_str = wb.color_str;
         this.capacity = wb.capacity;
         this.top_color_idx = wb.top_color_idx;
         this.isSameColor = wb.isSameColor;
@@ -88,7 +85,7 @@ public class WaterBottle {
         return !this.colors[0].equals("e");
     }
     public boolean isInsertable(WaterBottle wb2){
-        System.out.println(this.isEmpty()+" "+ this.getLastColor().equals(wb2.getLastColor())+ " "+ wb2.isEmpty()+ " "+this.getLastColor());
+//        System.out.println(this.isEmpty()+" "+ this.getLastColor().equals(wb2.getLastColor())+ " "+ wb2.isEmpty()+ " wb1 last color: "+this.getLastColor()+" wb2 last color: "+wb2.getLastColor());
         return !this.isEmpty() && ((this.getLastColor().equals(wb2.getLastColor()) && !wb2.isFull()) || (wb2.isEmpty()));
     }
 
@@ -98,6 +95,6 @@ public class WaterBottle {
     }
 
     public String toString(){
-        return "Bottle id: "+ id + " "+ color_str;
+        return "Bottle id: "+ this.id + "; "+ String.join(",", this.colors) + "; "+this.isSameColor;
     }
 }

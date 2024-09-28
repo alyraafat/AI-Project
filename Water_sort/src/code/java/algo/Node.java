@@ -24,17 +24,19 @@ public class Node {
         ArrayList<Node> res = new ArrayList<>();
         for(int i=0;i<this.water_bottles.length;i++){
             WaterBottle wb1 = this.water_bottles[i];
-            System.out.println("get children");
+//            System.out.println("get children");
             for(int j=i+1;j<this.water_bottles.length;j++){
-                System.out.println("get children inner");
+//                System.out.println("get children inner");
                 WaterBottle wb2 = this.water_bottles[j];
+//                System.out.println("Node one");
                 Node one = this.get_child(wb1, wb2, i, j);
+//                System.out.println("Node two");
                 Node two = this.get_child(wb2, wb1, j, i);
                 if (one != null) res.add(one);
                 if (two != null) res.add(two);
             }
         }
-        System.out.println(res);
+//        System.out.println(res);
         return res;
     }
 
@@ -43,11 +45,11 @@ public class Node {
         WaterBottle wb1_temp = wb1.clone();
         WaterBottle wb2_temp = wb2.clone();
         String operator = "pour_"+wb1.id+"_"+wb2.id;
-        System.out.println(operator);
+//        System.out.println(operator);
         while (wb1_temp.isInsertable(wb2_temp)) {
-            System.out.println("isInsertable");
-            System.out.println(wb1+"--"+wb2);
-            WaterBottle[] waterBottles = this.pour(wb1, wb2);
+//            System.out.println("isInsertable");
+//            System.out.println(wb1_temp+"--"+wb2_temp);
+            WaterBottle[] waterBottles = this.pour(wb1_temp, wb2_temp);
             wb1_temp = waterBottles[0];
             wb2_temp = waterBottles[1];
             new_cost++;
@@ -68,9 +70,10 @@ public class Node {
         WaterBottle wb1_copy = wb1.clone();
         String removed_color = wb1_copy.removeColor();
         WaterBottle wb2_copy = wb2.clone();
-        boolean is_inserted = wb2_copy.insertColor(removed_color);
+        boolean isInserted = wb2_copy.insertColor(removed_color);
         wbs[0] = wb1_copy;
         wbs[1] = wb2_copy;
+//        System.out.println("In pour: "+wb1_copy+"---"+wb2_copy+"////"+"removed_color: "+removed_color+"///isInserted:"+isInserted);
         return wbs;
     }
 }

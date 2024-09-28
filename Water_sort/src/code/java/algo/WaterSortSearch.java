@@ -17,7 +17,7 @@ public class WaterSortSearch extends GenericSearch{
         Node initNode = decodeInitString(initialState);
         QingFun qingFun = decodeStrategy(strategy);
         Node res = this.generalSearch(initNode, qingFun);
-        System.out.println("here2");
+//        System.out.println("here2");
         if (res == null) return "NOSOLUTION";
         return encodeOutput(res);
     }
@@ -35,7 +35,7 @@ public class WaterSortSearch extends GenericSearch{
     }
 
     public QingFun decodeStrategy(String strategy){
-        switch(strategy){
+        switch(strategy.toLowerCase()){
             default: return new BFSQueue();
         }
     }
