@@ -3,7 +3,7 @@ package algo;
 public class WaterSortSearch extends GenericSearch{
 
     public boolean goalFunc(Node n){
-        for(WaterBottle wb: n.water_bottles){
+        for(WaterBottle wb: n.waterBottles){
             if (!wb.isSameColor) return false;
         }
         return true;

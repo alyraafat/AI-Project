@@ -95,6 +95,6 @@ public class WaterBottle {
     }
 
     public String toString(){
-        return "Bottle id: "+ this.id + "; "+ String.join(",", this.colors) + "; "+this.isSameColor;
+        return "Bottle id: "+ this.id + "; "+ String.join(",", this.colors);
     }
 }
