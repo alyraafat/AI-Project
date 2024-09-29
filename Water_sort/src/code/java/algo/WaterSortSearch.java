@@ -33,6 +33,7 @@ public class WaterSortSearch extends GenericSearch{
 
     public QingFun decodeStrategy(String strategy){
         switch(strategy.toLowerCase()){
+            case "dfs": return new DFS();
             default: return new BFS();
         }
     }
@@ -46,7 +47,7 @@ public class WaterSortSearch extends GenericSearch{
 
     public static void main(String[] args){
         String init = "5;4;" + "b,y,r,b;" + "b,y,r,r;" + "y,r,b,y;" + "e,e,e,e;" + "e,e,e,e;";
-        String strategy = "bfs";
+        String strategy = "dfs";
         WaterSortSearch ws = new WaterSortSearch();
         String out = ws.solve(init, strategy, false);
         System.out.println(out);
