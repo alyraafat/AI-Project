@@ -97,4 +97,16 @@ public class WaterBottle {
     public String toString(){
         return "Bottle id: "+ this.id + "; "+ String.join(",", this.colors);
     }
+
+    public int getNumberOfDifferentColors(){
+        HashSet<String> colors = new HashSet<>();
+        int count = 0;
+        for(String color: this.colors){
+            if(!color.equals("e") && !colors.contains(color)){
+                colors.add(color);
+                count++;
+            }
+        }
+        return count;
+    }
 }
