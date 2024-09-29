@@ -1,32 +1,29 @@
 package algo;
 
-import java.util.Stack;
+import java.util.PriorityQueue;
 
-public class DFS extends QingFun {
-    private Stack<Node> stack;
-
-    public DFS() {
-        this.stack = new Stack<>();
+public class UCS extends QingFun{
+    private PriorityQueue<Node> pq;
+    public UCS(){
+        this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(node1.cost, node2.cost));
     }
-
     @Override
     public void addNode(Node node) {
-        stack.push(node);
+        pq.add(node);
     }
 
     @Override
     public Node removeNode() {
-        return stack.pop();
+        return pq.poll();
     }
 
     @Override
     public boolean isEmpty() {
-        return stack.isEmpty();
+        return pq.isEmpty();
     }
 
     @Override
     public int evalFunc(int layersPoured, WaterBottle[] waterBottles) {
-
         return layersPoured;
     }
 }

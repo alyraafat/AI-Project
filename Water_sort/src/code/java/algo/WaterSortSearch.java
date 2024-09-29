@@ -1,7 +1,9 @@
 package algo;
 
-public class WaterSortSearch extends GenericSearch{
+import java.util.HashSet;
 
+public class WaterSortSearch extends GenericSearch{
+    private String noSolution = "NOSOLUTION";
     public boolean goalFunc(Node n){
         for(WaterBottle wb: n.waterBottles){
             if (!wb.isSameColor) return false;
@@ -13,10 +15,24 @@ public class WaterSortSearch extends GenericSearch{
     public String solve(String initialState, String strategy, boolean visualize){
         Node initNode = decodeInitString(initialState);
         QingFun qingFun = decodeStrategy(strategy);
-        Node res = this.generalSearch(initNode, qingFun);
+        Node res = null;
+        if(qingFun instanceof IDS){
+            res = this.solveForIDS(initNode, (IDS) qingFun);
+        }else{
+            res = this.generalSearch(initNode, qingFun);
+        }
 //        System.out.println("here2");
-        if (res == null) return "NOSOLUTION";
+        if (res == null) return this.noSolution;
         return encodeOutput(res);
+    }
+    public Node solveForIDS(Node initNode, IDS ids){
+        for(int i=0; i<=ids.getMaxDepth(); i++){
+            ids.setSeen(new HashSet<>());
+            ids.setCurrDepth(i);
+            Node res = this.generalSearch(initNode, ids);
+            if (res != null) return res;
+        }
+        return null;
     }
 
     public Node decodeInitString(String initialState){
@@ -33,7 +49,13 @@ public class WaterSortSearch extends GenericSearch{
 
     public QingFun decodeStrategy(String strategy){
         switch(strategy.toLowerCase()){
-            case "dfs": return new DFS();
+            case "df": return new DFS();
+            case "uc": return new UCS();
+            case "id": return new IDS();
+            case "as1": return new AStar1();
+            case "as2": return new AStar2();
+            case "gr1": return new Greedy1();
+            case "gr2": return new Greedy2();
             default: return new BFS();
         }
     }
@@ -47,7 +69,7 @@ public class WaterSortSearch extends GenericSearch{
 
     public static void main(String[] args){
         String init = "5;4;" + "b,y,r,b;" + "b,y,r,r;" + "y,r,b,y;" + "e,e,e,e;" + "e,e,e,e;";
-        String strategy = "dfs";
+        String strategy = "id";
         WaterSortSearch ws = new WaterSortSearch();
         String out = ws.solve(init, strategy, false);
         System.out.println(out);

@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BFS extends QingFun{
-    Queue<Node> q;
+    private Queue<Node> q;
 
     public BFS(){
         this.q = new LinkedList<>();
@@ -22,7 +22,7 @@ public class BFS extends QingFun{
         return q.isEmpty();
     }
 
-    public int evalFunc(int layersPoured){
+    public int evalFunc(int layersPoured, WaterBottle[] waterBottles){
         return layersPoured;
     }
 }

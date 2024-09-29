@@ -17,6 +17,6 @@ public abstract class QingFun {
     }
     public abstract Node removeNode();
     public abstract boolean isEmpty();
-    public abstract int evalFunc(int layersPoured);
+    public abstract int evalFunc(int layersPoured, WaterBottle[] waterBottles);
 
 }

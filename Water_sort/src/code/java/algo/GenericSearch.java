@@ -17,6 +17,10 @@ public abstract class GenericSearch {
 //            System.out.println("here2");
             if(this.goalFunc(currNode)) return currNode;
 //            System.out.println("here3");
+
+            // added change for IDS
+            if(qingFun instanceof IDS && currNode.depth == ((IDS)qingFun).getCurrDepth()) continue;
+
             ArrayList<Node> children = currNode.get_children(qingFun::evalFunc);
 //            System.out.println("here4");
             this.nodesExpanded += 1;
@@ -27,5 +31,7 @@ public abstract class GenericSearch {
         }
         return null;
     }
+
+
 
 }
