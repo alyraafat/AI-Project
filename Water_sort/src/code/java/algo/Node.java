@@ -62,7 +62,6 @@ public class Node {
             WaterBottle[] newWaterBottles = this.waterBottles.clone();
             newWaterBottles[i] = wb1_temp;
             newWaterBottles[j] = wb2_temp;
-//            int addedCost = evalFunc.apply(layersPoured, newWaterBottles);
             return new Node(this, this.cost+layersPoured, this.depth+1, operator, newWaterBottles);
         }
         return null;
