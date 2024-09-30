@@ -21,8 +21,4 @@ public class BFS extends QingFun{
     public boolean isEmpty(){
         return q.isEmpty();
     }
-
-    public int evalFunc(int layersPoured, WaterBottle[] waterBottles){
-        return layersPoured;
-    }
 }

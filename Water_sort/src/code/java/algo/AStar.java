@@ -3,10 +3,12 @@ package algo;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-public abstract class AStar extends QingFun {
+import javafx.scene.Node;
+
+public abstract class AStar extends QingFun implements EvalInterface {
     private PriorityQueue<Node> pq;
     public AStar(){
-        this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(evalFunc(node1.cost, node1.waterBottles), evalFunc(node2.cost, node2.waterBottles)));
+        this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(evalFunc(node1), evalFunc(node2)));
     }
 
     public void addNode(Node node){
@@ -21,8 +23,8 @@ public abstract class AStar extends QingFun {
         return pq.isEmpty();
     }
 
-    public int evalFunc(int layersPoured, WaterBottle[] waterBottles){
-        return layersPoured + this.heuristic(waterBottles);
+    public int evalFunc(Node node){
+        return node.cost + this.heuristic(node.waterBottles);
     }
     public abstract int heuristic(WaterBottle[] waterBottles);
 }
