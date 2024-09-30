@@ -21,7 +21,7 @@ public abstract class GenericSearch {
             // added change for IDS
             if(qingFun instanceof IDS && currNode.depth == ((IDS)qingFun).getCurrDepth()) continue;
 
-            ArrayList<Node> children = currNode.get_children(qingFun::evalFunc);
+            ArrayList<Node> children = currNode.get_children();
 //            System.out.println("here4");
             this.nodesExpanded += 1;
 //            System.out.println("here5");

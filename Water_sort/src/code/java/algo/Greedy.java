@@ -1,6 +1,5 @@
 package algo;
 
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public abstract class Greedy extends QingFun implements EvalInterface {
@@ -24,5 +23,4 @@ public abstract class Greedy extends QingFun implements EvalInterface {
     public int evalFunc(Node node){
         return this.heuristic(node.waterBottles);
     }
-    public abstract int heuristic(WaterBottle[] waterBottles);
 }

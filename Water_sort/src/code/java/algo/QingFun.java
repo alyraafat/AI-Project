@@ -1,20 +1,38 @@
 package algo;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.TreeSet;
 import java.util.function.Function;
 
 public abstract class QingFun {
-    HashSet<Node> seen = new HashSet<>();
+    HashSet<Node> seen;
+//    TreeSet<Node> seen;
+    public QingFun(){
+//        Comparator<Node> nodeComparator = (n1, n2) -> {
+//            int contentComparison = n1.toString().compareTo(n2.toString());
+//            if (contentComparison != 0) {
+//                return contentComparison;
+//            }
+//            // If contents are the same, compare by cost (smaller cost comes first)
+//            return Integer.compare(n1.cost, n2.cost);
+//        };
+//        this.seen = new TreeSet<>(nodeComparator);
+        this.seen = new HashSet<>();
+    }
     public abstract void addNode(Node node);
     public void addNodes(ArrayList<Node> nodes){
         for(Node n: nodes){
             if(!seen.contains(n)){
                 addNode(n);
-                seen.add(n);
+                this.addToSeen(n);
             }
         }
     }
     public abstract Node removeNode();
     public abstract boolean isEmpty();
+    public void addToSeen(Node node){
+        this.seen.add(node);
+    }
 }

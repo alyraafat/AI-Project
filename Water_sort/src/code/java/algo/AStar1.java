@@ -11,7 +11,7 @@ public class AStar1 extends AStar{
         return max_diff_layers - 1;
     }
 
-//    just trying out other heuristic
+    //    just trying out other heuristic
 //    @Override
 //    public int heuristic(WaterBottle[] waterBottles) {
 //        // return the number of different colors in the bottle with the least different colors

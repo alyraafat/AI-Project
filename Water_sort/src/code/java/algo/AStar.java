@@ -1,9 +1,7 @@
 package algo;
 
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-import javafx.scene.Node;
 
 public abstract class AStar extends QingFun implements EvalInterface {
     private PriorityQueue<Node> pq;
@@ -26,5 +24,4 @@ public abstract class AStar extends QingFun implements EvalInterface {
     public int evalFunc(Node node){
         return node.cost + this.heuristic(node.waterBottles);
     }
-    public abstract int heuristic(WaterBottle[] waterBottles);
 }

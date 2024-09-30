@@ -12,7 +12,7 @@ public class WaterSortSearch extends GenericSearch{
     }
 
 
-    public String solve(String initialState, String strategy, boolean visualize){
+    public String solve(String initialState, String strategy, boolean visualize) throws Exception {
         Node initNode = decodeInitString(initialState);
         QingFun qingFun = decodeStrategy(strategy);
         Node res = null;
@@ -47,8 +47,9 @@ public class WaterSortSearch extends GenericSearch{
         return new Node(null, 0,0,null, wbs);
     }
 
-    public QingFun decodeStrategy(String strategy){
+    public QingFun decodeStrategy(String strategy) throws Exception {
         switch(strategy.toLowerCase()){
+            case "bf" : return new BFS();
             case "df": return new DFS();
             case "uc": return new UCS();
             case "id": return new IDS();
@@ -56,7 +57,7 @@ public class WaterSortSearch extends GenericSearch{
             case "as2": return new AStar2();
             case "gr1": return new Greedy1();
             case "gr2": return new Greedy2();
-            default: return new BFS();
+            default: throw new Exception("Input a valid strategy [bf, df, uc, id, as1, as2, gr1, gr2]");
         }
     }
 
@@ -67,9 +68,9 @@ public class WaterSortSearch extends GenericSearch{
         return plan + ";" + cost + ";" + nodesExpanded;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception {
         String init = "5;4;" + "b,y,r,b;" + "b,y,r,r;" + "y,r,b,y;" + "e,e,e,e;" + "e,e,e,e;";
-        String strategy = "as1";
+        String strategy = "bf";
         WaterSortSearch ws = new WaterSortSearch();
         String out = ws.solve(init, strategy, false);
         System.out.println(out);

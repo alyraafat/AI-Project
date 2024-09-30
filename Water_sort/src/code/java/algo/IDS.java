@@ -3,6 +3,7 @@ package algo;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;
+import java.util.TreeSet;
 
 public class IDS extends QingFun{
     private Stack<Node> stack;

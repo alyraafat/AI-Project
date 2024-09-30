@@ -24,7 +24,7 @@ public class Node {
         this.path = parent == null ? "" : (parent.path.isEmpty() ? this.operator: parent.path + "," + this.operator);
     }
 
-    public ArrayList<Node> get_children(BiFunction<Integer, WaterBottle[], Integer> evalFunc){
+    public ArrayList<Node> get_children(){
         ArrayList<Node> res = new ArrayList<>();
         for(int i=0;i<this.waterBottles.length;i++){
             WaterBottle wb1 = this.waterBottles[i];
@@ -33,9 +33,9 @@ public class Node {
 //                System.out.println("get children inner");
                 WaterBottle wb2 = this.waterBottles[j];
 //                System.out.println("Node one");
-                Node one = this.get_child(wb1, wb2, i, j, evalFunc);
+                Node one = this.get_child(wb1, wb2, i, j);
 //                System.out.println("Node two");
-                Node two = this.get_child(wb2, wb1, j, i, evalFunc);
+                Node two = this.get_child(wb2, wb1, j, i);
                 if (one != null) res.add(one);
                 if (two != null) res.add(two);
             }
@@ -44,7 +44,7 @@ public class Node {
         return res;
     }
 
-    public Node get_child(WaterBottle wb1, WaterBottle wb2, int i, int j, BiFunction<Integer, WaterBottle[], Integer> evalFunc){
+    public Node get_child(WaterBottle wb1, WaterBottle wb2, int i, int j){
         int layersPoured = 0;
         WaterBottle wb1_temp = wb1.clone();
         WaterBottle wb2_temp = wb2.clone();
@@ -84,7 +84,7 @@ public class Node {
     public boolean equals(Object o) {
         if (this == o) return true; // Check reference equality
         if (o == null || getClass() != o.getClass()) return false; // Check class type
-        Node node = (Node) o;
+        Node node = (Node) o; // node is the object we want to check whether it is in the hashset or not
         return node.toString().equals(this.toString()); // Check equality based on attributes
     }
 
