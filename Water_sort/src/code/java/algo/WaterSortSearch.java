@@ -1,6 +1,9 @@
 package algo;
 
+import com.sun.source.tree.Tree;
+
 import java.util.HashSet;
+import java.util.TreeSet;
 
 public class WaterSortSearch extends GenericSearch{
     private String noSolution = "NOSOLUTION";
@@ -70,7 +73,7 @@ public class WaterSortSearch extends GenericSearch{
 
     public static void main(String[] args) throws Exception {
         String init = "5;4;" + "b,y,r,b;" + "b,y,r,r;" + "y,r,b,y;" + "e,e,e,e;" + "e,e,e,e;";
-        String strategy = "bf";
+        String strategy = "UC";
         WaterSortSearch ws = new WaterSortSearch();
         String out = ws.solve(init, strategy, false);
         System.out.println(out);

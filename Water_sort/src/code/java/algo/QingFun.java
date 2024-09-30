@@ -9,8 +9,9 @@ import java.util.function.Function;
 public abstract class QingFun {
     HashSet<Node> seen;
 //    TreeSet<Node> seen;
+//    Comparator<Node> nodeComparator;
     public QingFun(){
-//        Comparator<Node> nodeComparator = (n1, n2) -> {
+//        this.nodeComparator = (n1, n2) -> {
 //            int contentComparison = n1.toString().compareTo(n2.toString());
 //            if (contentComparison != 0) {
 //                return contentComparison;
