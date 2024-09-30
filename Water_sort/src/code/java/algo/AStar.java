@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 public abstract class AStar extends QingFun {
     private PriorityQueue<Node> pq;
     public AStar(){
-        this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(node1.cost, node2.cost));
+        this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(evalFunc(node1.cost, node1.waterBottles), evalFunc(node2.cost, node2.waterBottles)));
     }
 
     public void addNode(Node node){
