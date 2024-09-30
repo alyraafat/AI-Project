@@ -24,9 +24,9 @@ public class DFS extends QingFun {
         return stack.isEmpty();
     }
 
-//    @Override
-//    public int evalFunc(int layersPoured, WaterBottle[] waterBottles) {
-//
-//        return layersPoured;
-//    }
+    @Override
+    public int evalFunc(int layersPoured, WaterBottle[] waterBottles) {
+
+        return layersPoured;
+    }
 }

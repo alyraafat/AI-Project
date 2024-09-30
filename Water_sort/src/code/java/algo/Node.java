@@ -24,7 +24,7 @@ public class Node {
         this.path = parent == null ? "" : (parent.path.isEmpty() ? this.operator: parent.path + "," + this.operator);
     }
 
-    public ArrayList<Node> get_children(Function<Integer, Integer> evalFunc){
+    public ArrayList<Node> get_children(BiFunction<Integer, WaterBottle[], Integer> evalFunc){
         ArrayList<Node> res = new ArrayList<>();
         for(int i=0;i<this.waterBottles.length;i++){
             WaterBottle wb1 = this.waterBottles[i];
@@ -44,7 +44,7 @@ public class Node {
         return res;
     }
 
-    public Node get_child(WaterBottle wb1, WaterBottle wb2, int i, int j, Function<Integer, Integer> evalFunc){
+    public Node get_child(WaterBottle wb1, WaterBottle wb2, int i, int j, BiFunction<Integer, WaterBottle[], Integer> evalFunc){
         int layersPoured = 0;
         WaterBottle wb1_temp = wb1.clone();
         WaterBottle wb2_temp = wb2.clone();
@@ -62,8 +62,8 @@ public class Node {
             WaterBottle[] newWaterBottles = this.waterBottles.clone();
             newWaterBottles[i] = wb1_temp;
             newWaterBottles[j] = wb2_temp;
-            int addedCost = evalFunc.apply(layersPoured);
-            return new Node(this, this.cost+addedCost, this.depth+1, operator, newWaterBottles);
+//            int addedCost = evalFunc.apply(layersPoured, newWaterBottles);
+            return new Node(this, this.cost+layersPoured, this.depth+1, operator, newWaterBottles);
         }
         return null;
     }

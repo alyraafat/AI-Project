@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 public abstract class Greedy extends QingFun {
     private PriorityQueue<Node> pq;
     public Greedy(){
-        this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(this.heuristic(node1.waterBottles), this.heuristic(node2.waterBottles)));
+        this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(evalFunc(node1.cost, node1.waterBottles), evalFunc(node2.cost, node2.waterBottles)));
     }
 
     public void addNode(Node node){
@@ -21,8 +21,8 @@ public abstract class Greedy extends QingFun {
         return pq.isEmpty();
     }
 
-//    public int evalFunc(int layersPoured, WaterBottle[] waterBottles){
-//        return this.heuristic(waterBottles);
-//    }
+    public int evalFunc(int layersPoured, WaterBottle[] waterBottles){
+        return this.heuristic(waterBottles);
+    }
     public abstract int heuristic(WaterBottle[] waterBottles);
 }
