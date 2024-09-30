@@ -21,9 +21,4 @@ public class UCS extends QingFun{
     public boolean isEmpty() {
         return pq.isEmpty();
     }
-
-    @Override
-    public int evalFunc(int layersPoured, WaterBottle[] waterBottles) {
-        return layersPoured;
-    }
 }

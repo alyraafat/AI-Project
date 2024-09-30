@@ -29,12 +29,6 @@ public class IDS extends QingFun{
         return stack.isEmpty();
     }
 
-    @Override
-    public int evalFunc(int layersPoured, WaterBottle[] waterBottles) {
-
-        return layersPoured;
-    }
-
     public int getMaxDepth() {
         return maxDepth;
     }
