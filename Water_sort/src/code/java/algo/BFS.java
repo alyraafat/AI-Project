@@ -22,7 +22,7 @@ public class BFS extends QingFun{
         return q.isEmpty();
     }
 
-    public int evalFunc(int layersPoured, WaterBottle[] waterBottles){
-        return layersPoured;
-    }
+//    public int evalFunc(int layersPoured, WaterBottle[] waterBottles){
+//        return layersPoured;
+//    }
 }

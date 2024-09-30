@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 public abstract class AStar extends QingFun {
     private PriorityQueue<Node> pq;
     public AStar(){
-        this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(node1.cost, node2.cost));
+        this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(node1.cost+this.heuristic(node1.waterBottles), node2.cost+this.heuristic(node2.waterBottles)));
     }
 
     public void addNode(Node node){
@@ -21,8 +21,8 @@ public abstract class AStar extends QingFun {
         return pq.isEmpty();
     }
 
-    public int evalFunc(int layersPoured, WaterBottle[] waterBottles){
-        return layersPoured + this.heuristic(waterBottles);
-    }
+//    public int evalFunc(int layersPoured, WaterBottle[] waterBottles){
+//        return layersPoured + this.heuristic(waterBottles);
+//    }
     public abstract int heuristic(WaterBottle[] waterBottles);
 }
