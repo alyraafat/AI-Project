@@ -15,18 +15,19 @@ public class WaterSortSearch extends GenericSearch{
     }
 
 
-    public String solve(String initialState, String strategy, boolean visualize) throws Exception {
-        Node initNode = decodeInitString(initialState);
-        QingFun qingFun = decodeStrategy(strategy);
+    public static String solve(String initialState, String strategy, boolean visualize) throws Exception {
+        WaterSortSearch problem = new WaterSortSearch();
+        Node initNode = problem.decodeInitString(initialState);
+        QingFun qingFun = problem.decodeStrategy(strategy);
         Node res = null;
         if(qingFun instanceof IDS){
-            res = this.solveForIDS(initNode, (IDS) qingFun);
+            res = problem.solveForIDS(initNode, (IDS) qingFun);
         }else{
-            res = this.generalSearch(initNode, qingFun);
+            res = problem.generalSearch(initNode, qingFun);
         }
 //        System.out.println("here2");
-        if (res == null) return this.noSolution;
-        return encodeOutput(res);
+        if (res == null) return problem.noSolution;
+        return problem.encodeOutput(res);
     }
     public Node solveForIDS(Node initNode, IDS ids){
         for(int i=0; i<=ids.getMaxDepth(); i++){
