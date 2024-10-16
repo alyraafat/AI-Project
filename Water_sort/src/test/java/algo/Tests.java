@@ -9,6 +9,8 @@ import org.junit.runners.MethodSorters;
 import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
+
+
 public class Tests {
 
     String grid0 = "3;" +
@@ -444,10 +446,9 @@ class Checker{
     public boolean applyPlan(String grid, String solution){
         boolean x = true;
         solution = solution.toLowerCase();
-        if (solution.equals("nosolution")) {
+        if (solution.equals("nosolution;")) {
             return false;
         }
-//        System.out.println(solution);
         String[] y  = solution.split(";");
         String z = y[0];
         int _a = Integer.parseInt(y[1]);
