@@ -96,50 +96,15 @@ Uninformed search algorithms explore the state space without any prior knowledge
 #### Breadth-First Search (BFS)
 BFS explores the puzzle level by level. Starting from the initial state, it adds all possible next moves to a queue. The search examines each node at the current level before moving on to the next, ensuring that the shortest path (in terms of moves) is found first.
 
-| Puzzle Number       | RAM Utilization (MB) | CPU Utilization(%) |
-|-----------------|-----------------|------------------|
-| Puzzle 0 | 0           | O(b^d)           |
-| Puzzle 1   | O(b^m)           | O(bm)            |
-| Puzzle 2    | 109           |       25.22      |
-| Puzzle 3   | O(b^m)           | O(bm)            |
-| Puzzle 4                 | O(b^d)           | O(b^d)           |
-| Puzzle 5    | O(b^m)           | O(bm)            |
-
 #### Depth-First Search (DFS)
 DFS explores each possible path to its deepest level before backtracking. This approach uses a stack to keep track of nodes, diving into each possibility until it reaches a dead-end, then backtracking to explore other paths. DFS can be memory-efficient but may not always find the shortest solution.
-
-| Puzzle Number       | RAM Utilization (MB) | CPU Utilization(%) |
-|-----------------|-----------------|------------------|
-| Puzzle 0 | 0           | O(b^d)           |
-| Puzzle 1   | O(b^m)           | O(bm)            |
-| Puzzle 2    | 109           |       25.22      |
-| Puzzle 3   | O(b^m)           | O(bm)            |
-| Puzzle 4                 | O(b^d)           | O(b^d)           |
-| Puzzle 5    | O(b^m)           | O(bm)            |
 
 #### Iterative Deepening Search (IDS)
 IDS combines the benefits of BFS and DFS by progressively deepening the search level limit. It performs DFS with a depth limit, incrementally increasing the depth limit until a solution is found. This method finds the shortest path without the high memory usage of BFS.
 
-| Puzzle Number       | RAM Utilization (MB) | CPU Utilization(%) |
-|-----------------|-----------------|------------------|
-| Puzzle 0 | 0           | O(b^d)           |
-| Puzzle 1   | O(b^m)           | O(bm)            |
-| Puzzle 2    | 109           |       25.22      |
-| Puzzle 3   | O(b^m)           | O(bm)            |
-| Puzzle 4                 | O(b^d)           | O(b^d)           |
-| Puzzle 5    | O(b^m)           | O(bm)            |
-
 #### Uniform Cost Search (UCS)
 UCS expands nodes based on the accumulated cost rather than depth, using a priority queue to explore the lowest-cost path first. This ensures an optimal solution, as UCS always takes the cheapest route to reach the solution.
 
-| Puzzle Number       | RAM Utilization (MB) | CPU Utilization(%) |
-|-----------------|-----------------|------------------|
-| Puzzle 0 | 0           | O(b^d)           |
-| Puzzle 1   | O(b^m)           | O(bm)            |
-| Puzzle 2    | 109           |       25.22      |
-| Puzzle 3   | O(b^m)           | O(bm)            |
-| Puzzle 4                 | O(b^d)           | O(b^d)           |
-| Puzzle 5    | O(b^m)           | O(bm)            |
 
 ### Informed Search
 Informed search algorithms use heuristics to guide the search, making them generally faster and more efficient than uninformed methods.
@@ -153,31 +118,11 @@ A* search combines the actual cost to reach a node with a heuristic estimate of 
   - This heuristic calculates the number of different colors in the bottle with the most color diversity. For example, if a bottle has three colors, it indicates a greater level of disorganization and complexity.
   - By prioritizing moves that reduce the color variety in the most complex bottle, the heuristic assumes that fewer mixed colors mean the solution is closer, as each bottle approaches a single color state.
   - **Why it works**: This heuristic focuses on minimizing the most "problematic" bottle in the current state, where high color diversity suggests more moves are necessary to isolate a single color. Reducing this complexity should simplify the rest of the puzzle.
-  - **Performance** :
-
-  | Puzzle Number       | RAM Utilization (MB) | CPU Utilization(%) |
-    |-----------------|-----------------|------------------|
-    | Puzzle 0 | 0           | O(b^d)           |
-    | Puzzle 1   | O(b^m)           | O(bm)            |
-    | Puzzle 2    | 109           |       25.22      |
-    | Puzzle 3   | O(b^m)           | O(bm)            |
-    | Puzzle 4                 | O(b^d)           | O(b^d)           |
-    | Puzzle 5    | O(b^m)           | O(bm)            |
 
 - **AStar2 Heuristic**: `Count of Unsorted Bottles`
   - This heuristic counts the number of bottles that are not yet filled with a single color (i.e., those that still have a mix of colors).
   - By aiming to reduce the count of mixed bottles, it seeks to bring the puzzle closer to the goal where every bottle is either empty or filled with a uniform color.
   - **Why it works**: In this puzzle, each unsorted bottle represents unfinished work. By minimizing unsorted bottles, the heuristic encourages moves that achieve completion, which, in turn, means progress toward solving the puzzle.
-  - **Performance ** :
-
-  | Puzzle Number       | RAM Utilization (MB) | CPU Utilization(%) |
-    |-----------------|-----------------|------------------|
-    | Puzzle 0 | 0           | O(b^d)           |
-    | Puzzle 1   | O(b^m)           | O(bm)            |
-    | Puzzle 2    | 109           |       25.22      |
-    | Puzzle 3   | O(b^m)           | O(bm)            |
-    | Puzzle 4                 | O(b^d)           | O(b^d)           |
-    | Puzzle 5    | O(b^m)           | O(bm)            |
 
 #### Greedy Search Heuristics
 Greedy search uses only the heuristic value to decide which node to explore next. While this makes it faster, it does not guarantee the shortest solution path since it might skip promising paths. The two heuristic variants in Greedy search (Greedy1 and Greedy2) mirror the A* heuristics but focus solely on making each move closer to the immediate goal:
@@ -185,27 +130,32 @@ Greedy search uses only the heuristic value to decide which node to explore next
 - **Greedy1 Heuristic**: `Max Diversity in Bottles`
   - Similar to AStar1, this heuristic targets the bottle with the highest color diversity and counts the different colors within it. The goal is to reduce this count, assuming that fewer mixed colors mean fewer rearrangement steps are needed.
   - **Why it works**: Greedy1 aims to simplify the most complex bottle immediately, assuming that moves focused on clearing out color diversity in the toughest bottle will lead closer to the goal.
-  - **Performance** :
-
-  | Puzzle Number       | RAM Utilization (MB) | CPU Utilization(%) |
-    |-----------------|-----------------|------------------|
-    | Puzzle 0 | 0           | O(b^d)           |
-    | Puzzle 1   | O(b^m)           | O(bm)            |
-    | Puzzle 2    | 109           |       25.22      |
-    | Puzzle 3   | O(b^m)           | O(bm)            |
-    | Puzzle 4                 | O(b^d)           | O(b^d)           |
-    | Puzzle 5    | O(b^m)           | O(bm)            |
 
 - **Greedy2 Heuristic**: `Count of Unsorted Bottles`
   - Like AStar2, Greedy2 counts bottles that are not yet sorted. By focusing on minimizing this count, it attempts to make the puzzle state more organized with each step, getting closer to a solution with every bottle that reaches a uniform state.
   - **Why it works**: This heuristic encourages moves that result in complete sorting of bottles as fast as possible, assuming that fewer unsorted bottles indicate that a solution is near. However, unlike A*, it may take paths that don’t lead to the shortest overall solution.
-  - **Performance** :
 
-  | Puzzle Number       | RAM Utilization (MB) | CPU Utilization(%) |
-    |-----------------|-----------------|------------------|
-    | Puzzle 0 | 0           | O(b^d)           |
-    | Puzzle 1   | O(b^m)           | O(bm)            |
-    | Puzzle 2    | 109           |       25.22      |
-    | Puzzle 3   | O(b^m)           | O(bm)            |
-    | Puzzle 4                 | O(b^d)           | O(b^d)           |
-    | Puzzle 5    | O(b^m)           | O(bm)            |
+
+**Performance of Search Algorithms** :
+The following puzzle was solved using the above algorithms and we compared the CPU utilization and RAM utilization:
+
+Puzzle = "6;6;"
+			    + "e,e,e,g,r,r;"   // Bottle 0
+			    + "e,e,e,r,b,b;"   // Bottle 1
+			    + "e,e,e,b,y,g;"   // Bottle 2
+			    + "e,e,e,g,r,y;"   // Bottle 3
+			    + "e,e,e,e,e,e;"   // Bottle 4 
+			    + "e,e,e,e,e,e;"; // Bottle 5
+
+
+
+| Algorithm      | RAM Utilization (MB) | CPU Utilization(%) |
+|-----------------|-----------------|------------------|
+| Breadth-First Search | 654           | 4.29           |
+| Depth-First Search | 12          | 8.89          |
+| Uniform Cost Search    | 223           |       4.22     |
+| Iterative Deepening Search  | 122           |3.81         |
+| Greedy Heuristic 1               | 7           | 0        |
+| Greedy Heuristic 2 | 5         | 0            | 
+| A Star Heuristic 1               | 150           | 7.37          |
+| A Star Heuristic 2 | 19          | 3.57            |
