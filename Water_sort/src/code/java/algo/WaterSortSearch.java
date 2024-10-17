@@ -36,52 +36,54 @@ public class WaterSortSearch extends GenericSearch{
         if(visualize) System.out.println(visualizeSteps(res));;
         return problem.encodeOutput(res);
     }
-    
-    
-    public static String visualizeSteps(Node node) {
-    	if(node.parent == null) {
-    		return stateToString(node);
-    	}
-    	
-    	return visualizeSteps(node.parent) + "\n" + stateToString(node);
-    }
-    
-    public static String stateToString(Node node) {
-        String result = "";
-        WaterBottle[] waterBottles = node.waterBottles;
-        int bottleLength = waterBottles[0].capacity;
-        result += node.operator != null? "After " + node.operator + "\n" : "Start" + "\n";
-        for (int i = 0; i < bottleLength; i++) {
-            for (int j = 0; j < waterBottles.length; j++) {
-                String color = waterBottles[j].colors[i];
-                result += " " + color + " |";  // Added space before color for alignment
-            }
-            result += "\n";
-        }
-        
-        
-        for (int k = 0; k < waterBottles.length; k++) {
-            result += "--- "; 
-        }
-        result += "\n";
-        
-        for (int k = 0; k < waterBottles.length; k++) {
-            result += " " + k + "  "; 
-        }
-        result += "\n" + "-----------------------------------------";
-        return result;
-    }
 
-     
     public Node solveForIDS(Node initNode, IDS ids){
-        for(int i=0; i<=ids.getMaxDepth(); i++){
+        int i=0;
+        while(!ids.getAllNodesDepthLessThanCurrDepth()){
             ids.setSeen(new HashSet<>());
             ids.setCurrDepth(i);
             Node res = this.generalSearch(initNode, ids);
             if (res != null) return res;
+            i++;
         }
         return null;
     }
+
+
+    public static String visualizeSteps(Node node) {
+    	if(node.parent == null) {
+    		return stateToString(node);
+    	}
+
+    	return visualizeSteps(node.parent) + "\n" + stateToString(node);
+    }
+
+    public static String stateToString(Node node) {
+        StringBuilder result = new StringBuilder();
+        WaterBottle[] waterBottles = node.waterBottles;
+        int bottleLength = waterBottles[0].capacity;
+        result.append(node.operator != null ? "After " + node.operator + "\n" : "Start" + "\n");
+        for (int i = 0; i < bottleLength; i++) {
+            for (int j = 0; j < waterBottles.length; j++) {
+                String color = waterBottles[j].colors[i];
+                result.append(" ").append(color).append(" |");  // Added space before color for alignment
+            }
+            result.append("\n");
+        }
+
+
+        for (int k = 0; k < waterBottles.length; k++) {
+            result.append("--- ");
+        }
+        result.append("\n");
+
+        for (int k = 0; k < waterBottles.length; k++) {
+            result.append(" ").append(k).append("  ");
+        }
+        result.append("\n" + "-----------------------------------------");
+        return result.toString();
+    }
+
 
     public Node decodeInitString(String initialState){
         String[] elems = initialState.split(";");
@@ -108,7 +110,11 @@ public class WaterSortSearch extends GenericSearch{
             default: throw new Exception("Input a valid strategy [bf, df, uc, id, as1, as2, gr1, gr2]");
         }
     }
-
+    public static double getProcessCpuLoad() {
+        com.sun.management.OperatingSystemMXBean osBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory
+                .getOperatingSystemMXBean();
+        return osBean.getProcessCpuLoad() * 100; // CPU load as a percentage
+    }
     public String encodeOutput(Node node){
         int cost = node.cost;
         int nodesExpanded = this.nodesExpanded;
@@ -156,37 +162,71 @@ public class WaterSortSearch extends GenericSearch{
         String strategy = "BF";
 
         // Get Runtime, OperatingSystemMXBean, and ThreadMXBean instances
+//        Runtime runtime = Runtime.getRuntime();
+//        ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
+//
+//        // Calculate initial memory usage
+//        long startMemory = runtime.totalMemory() - runtime.freeMemory();
+//
+//        // Record initial CPU time and wall-clock time
+//        long startCpuTime = threadBean.getCurrentThreadCpuTime();
+//        long startWallClockTime = System.nanoTime();
+//
+//        // Call the solve method
+//        String solution = WaterSortSearch.solve(grid1, strategy, true);
+//
+//        // Calculate final memory usage
+//        long endMemory = runtime.totalMemory() - runtime.freeMemory();
+//        long memoryUsed = endMemory - startMemory;
+//
+//        // Record final CPU time and wall-clock time
+//        long endCpuTime = threadBean.getCurrentThreadCpuTime();
+//        long endWallClockTime = System.nanoTime();
+//
+//        // Calculate CPU time used and wall-clock time
+//        long cpuTimeUsed = endCpuTime - startCpuTime;
+//        long wallClockTimeElapsed = endWallClockTime - startWallClockTime;
+//
+//        // Calculate CPU Utilization as a percentage
+//        double cpuUtilization = (double) cpuTimeUsed / wallClockTimeElapsed * 100;
+//
+//        // Print results
+//        System.out.println(solution);
+//        System.out.println("Memory used (MB): " + (memoryUsed / 100000));
+//        System.out.println("CPU utilization (%): " + cpuUtilization);
+        // Get Runtime and OperatingSystemMXBean instances
         Runtime runtime = Runtime.getRuntime();
-        ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
 
         // Calculate initial memory usage
         long startMemory = runtime.totalMemory() - runtime.freeMemory();
 
-        // Record initial CPU time and wall-clock time
-        long startCpuTime = threadBean.getCurrentThreadCpuTime();
+        // Record initial CPU load and wall-clock time
+        double initialCpuLoad = getProcessCpuLoad();
         long startWallClockTime = System.nanoTime();
 
         // Call the solve method
         String solution = WaterSortSearch.solve(grid1, strategy, true);
 
-        // Calculate final memory usage
+        // Record final CPU load and wall-clock time
+        double finalCpuLoad = getProcessCpuLoad();
+        long endWallClockTime = System.nanoTime();
+
+        // Calculate memory usage
         long endMemory = runtime.totalMemory() - runtime.freeMemory();
         long memoryUsed = endMemory - startMemory;
 
-        // Record final CPU time and wall-clock time
-        long endCpuTime = threadBean.getCurrentThreadCpuTime();
-        long endWallClockTime = System.nanoTime();
+        // Calculate wall-clock time elapsed (in seconds)
+        double wallClockTimeElapsed = (endWallClockTime - startWallClockTime) / 1e9;
 
-        // Calculate CPU time used and wall-clock time
-        long cpuTimeUsed = endCpuTime - startCpuTime;
-        long wallClockTimeElapsed = endWallClockTime - startWallClockTime;
-
-        // Calculate CPU Utilization as a percentage
-        double cpuUtilization = (double) cpuTimeUsed / wallClockTimeElapsed * 100;
+        // Calculate CPU Utilization based on load before and after the solve
+        double cpuUtilizationDuringSolve = (finalCpuLoad - initialCpuLoad);
 
         // Print results
         System.out.println(solution);
-        System.out.println("Memory used (MB): " + (memoryUsed / 100000));
-        System.out.println("CPU utilization (%): " + cpuUtilization);
+        System.out.println("Memory used (MB): " + (memoryUsed / 1000000));  // Convert to MB
+        System.out.println("CPU load before solving (%): " + initialCpuLoad);
+        System.out.println("CPU load after solving (%): " + finalCpuLoad);
+        System.out.println("CPU utilization change during solve (%): " + cpuUtilizationDuringSolve);
+        System.out.println("Wall-clock time elapsed (seconds): " + wallClockTimeElapsed);
     }
 }
