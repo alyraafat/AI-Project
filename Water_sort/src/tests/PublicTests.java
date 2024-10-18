@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 
 
-public class Tests {
+public class PublicTests {
 
     String grid0 = "3;" +
             "4;" +
