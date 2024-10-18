@@ -1,5 +1,3 @@
-package algo;
-
 import java.util.HashSet;
 
 public class WaterBottle {

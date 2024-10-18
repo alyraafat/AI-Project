@@ -1,7 +1,4 @@
-package algo;
-
 import java.util.ArrayList;
-import java.util.function.Function;
 
 public abstract class GenericSearch {
     int nodesExpanded;

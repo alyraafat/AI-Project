@@ -1,5 +1,3 @@
-package algo;
-
 import java.util.PriorityQueue;
 
 public class UCS extends QingFun{

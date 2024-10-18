@@ -1,12 +1,7 @@
-package algo;
-
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.ThreadMXBean;
-import com.sun.source.tree.Tree;
 
 import java.util.HashSet;
-import java.util.TreeSet;
 
 public class WaterSortSearch extends GenericSearch {
     private String noSolution = "NOSOLUTION";

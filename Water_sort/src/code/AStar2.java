@@ -1,6 +1,4 @@
-package algo;
-
-public class Greedy2 extends Greedy{
+public class AStar2 extends AStar{
     @Override
     public int heuristic(WaterBottle[] waterBottles) {
         // return the number of bottles that are not filled with the same color

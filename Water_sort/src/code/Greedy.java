@@ -1,11 +1,8 @@
-package algo;
-
 import java.util.PriorityQueue;
 
-
-public abstract class AStar extends QingFun implements EvalInterface {
+public abstract class Greedy extends QingFun implements EvalInterface {
     private PriorityQueue<Node> pq;
-    public AStar(){
+    public Greedy(){
         this.pq = new PriorityQueue<>((node1, node2) -> Integer.compare(evalFunc(node1), evalFunc(node2)));
     }
 
@@ -22,6 +19,6 @@ public abstract class AStar extends QingFun implements EvalInterface {
     }
 
     public int evalFunc(Node node){
-        return node.cost + this.heuristic(node.waterBottles);
+        return this.heuristic(node.waterBottles);
     }
 }
