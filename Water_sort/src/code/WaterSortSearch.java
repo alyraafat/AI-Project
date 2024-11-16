@@ -1,4 +1,5 @@
 import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.ThreadMXBean;
 
 import java.util.HashSet;
@@ -115,11 +116,6 @@ public class WaterSortSearch extends GenericSearch {
         }
     }
 
-    public static double getProcessCpuLoad() {
-        com.sun.management.OperatingSystemMXBean osBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory
-                .getOperatingSystemMXBean();
-        return osBean.getProcessCpuLoad() * 100; // CPU load as a percentage
-    }
 
     public String encodeOutput(Node node) {
         int cost = node.cost;
@@ -129,6 +125,7 @@ public class WaterSortSearch extends GenericSearch {
     }
 
     public static void main(String[] args) throws Exception {
+        String grid = "6;" + "3;" + "r,r,y;" + "b,y,r;" + "y,b,g;" + "g,g,b;" + "e,e,e;" + "e,e,e;";
         Runtime runtime = Runtime.getRuntime();
         ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
         System.gc();
@@ -136,10 +133,9 @@ public class WaterSortSearch extends GenericSearch {
         // Calculate initial memory usage
         long startMemory = runtime.totalMemory() - runtime.freeMemory();
 
-        // Record initial CPU time and wall-clock time
         double startCpuTime = threadBean.getCurrentThreadCpuTime();
         double startWallClockTime = System.nanoTime();
-        System.out.println("startCpuTime : " + startCpuTime);
+        // Record initial CPU time and wall-clock time
         String init = "6;6;"
                 + "e,e,e,g,r,r;" // Bottle 0
                 + "e,e,e,r,b,b;" // Bottle 1
@@ -148,10 +144,9 @@ public class WaterSortSearch extends GenericSearch {
                 + "e,e,e,e,e,e;" // Bottle 6 (empty)
                 + "e,e,e,e,e,e;"; // Bottle 9 (empty)
 
-        String grid = "6;" + "3;" + "r,r,y;" + "b,y,r;" + "y,b,g;" + "g,g,b;" + "e,e,e;" + "e,e,e;";
 
         // double before = getProcessCpuLoad();
-        String result = WaterSortSearch.solve(init, "GR2", true);
+        String result = WaterSortSearch.solve(init, "id", false);
         // double after = getProcessCpuLoad();
         System.out.println("result :	 " + result);
         // System.out.println("Before : " + (before));
@@ -165,6 +160,7 @@ public class WaterSortSearch extends GenericSearch {
         double endCpuTime = threadBean.getCurrentThreadCpuTime();
         double endWallClockTime = System.nanoTime();
 
+        System.out.println("startCpuTime : " + startCpuTime);
         System.out.println("endCpuTime : " + endCpuTime);
 
         // Calculate CPU time used and wall-clock time
@@ -184,6 +180,7 @@ public class WaterSortSearch extends GenericSearch {
         System.out.println("ClockTimeElapsed (ms): " + wallClockTimeElapsed / 1000000);
 
         System.out.println("result : " + result);
+
 
     }
 }

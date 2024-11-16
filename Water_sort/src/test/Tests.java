@@ -3,7 +3,6 @@
 
 
 import org.junit.FixMethodOrder;
-import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.*;
@@ -49,7 +48,7 @@ public class Tests {
             "e,e,e;" +
             "e,e,e;";
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testa0() throws Exception {
         String solution = WaterSortSearch.solve(grid0, "BF", false);
         solution = solution.replace(" ", "")+";";
@@ -57,14 +56,14 @@ public class Tests {
         Checker pc = new Checker(grid0);
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid0, solution));
     }
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testa1() throws Exception {
         String solution = WaterSortSearch.solve(grid1, "BF", false);
         solution = solution.replace(" ", "")+";";
         Checker pc = new Checker(grid1);
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid1, solution));
     }
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testa2() throws Exception {
         String solution = WaterSortSearch.solve(grid2, "BF", false);
         solution = solution.replace(" ", "")+";";
@@ -73,7 +72,7 @@ public class Tests {
 
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid2, solution));
     }
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testa3() throws Exception {
         String solution = WaterSortSearch.solve(grid3, "BF", false);
         solution = solution.replace(" ", "")+";";
@@ -81,7 +80,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid3, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testa4() throws Exception {
         String solution = WaterSortSearch.solve(grid4, "BF", false);
         solution = solution.replace(" ", "")+";";
@@ -90,7 +89,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid4, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testb0() throws Exception {
         String solution = WaterSortSearch.solve(grid0, "DF", false);
         solution = solution.replace(" ", "")+";";
@@ -98,7 +97,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid0, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testb1() throws Exception {
         String solution = WaterSortSearch.solve(grid1, "DF", false);
         solution = solution.replace(" ", "")+";";
@@ -106,7 +105,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid1, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testb2() throws Exception {
         String solution = WaterSortSearch.solve(grid2, "DF", false);
         solution = solution.replace(" ", "")+";";
@@ -114,7 +113,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.",  pc.applyPlan(grid2, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testb3() throws Exception {
         String solution = WaterSortSearch.solve(grid3, "DF", false);
         solution = solution.replace(" ", "")+";";
@@ -123,7 +122,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.",pc.applyPlan(grid3, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testb4() throws Exception {
         String solution = WaterSortSearch.solve(grid4, "DF", false);
         solution = solution.replace(" ", "")+";";
@@ -132,14 +131,14 @@ public class Tests {
     }
 
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testc0() throws Exception {
         String solution = WaterSortSearch.solve(grid0, "UC", false);
         solution = solution.replace(" ", "")+";";
         Checker pc = new Checker(grid0);
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid0, solution));
     }
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testc1() throws Exception {
         String solution = WaterSortSearch.solve(grid1, "UC", false);
         solution = solution.replace(" ", "")+";";
@@ -147,7 +146,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid1, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testc2() throws Exception {
         String solution = WaterSortSearch.solve(grid2, "UC", false);
         solution = solution.replace(" ", "")+";";
@@ -156,7 +155,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid2, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testc3() throws Exception {
         String solution = WaterSortSearch.solve(grid3, "UC", false);
         solution = solution.replace(" ", "")+";";
@@ -164,7 +163,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid3, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testc4() throws Exception {
         String solution = WaterSortSearch.solve(grid4, "UC", false);
         solution = solution.replace(" ", "")+";";
@@ -172,7 +171,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid4, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testd0() throws Exception {
         String solution = WaterSortSearch.solve(grid0, "ID", false);
         solution = solution.replace(" ", "")+";";
@@ -180,7 +179,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid0, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testd1() throws Exception {
         String solution = WaterSortSearch.solve(grid1, "ID", false);
         solution = solution.replace(" ", "")+";";
@@ -188,7 +187,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid1, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testd2() throws Exception {
         String solution = WaterSortSearch.solve(grid2, "ID", false);
         solution = solution.replace(" ", "")+";";
@@ -196,7 +195,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid2, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testd3() throws Exception {
         String solution = WaterSortSearch.solve(grid3, "ID", false);
         solution = solution.replace(" ", "")+";";
@@ -204,7 +203,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid3, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testd4() throws Exception {
         String solution = WaterSortSearch.solve(grid4, "ID", false);
         solution = solution.replace(" ", "")+";";
@@ -213,7 +212,7 @@ public class Tests {
     }
 
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void teste0() throws Exception {
         String solution = WaterSortSearch.solve(grid0, "GR1", false);
         solution = solution.replace(" ", "")+";";
@@ -221,7 +220,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid0, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void teste1() throws Exception {
         String solution = WaterSortSearch.solve(grid1, "GR1", false);
         solution = solution.replace(" ", "")+";";
@@ -229,7 +228,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid1, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void teste2() throws Exception {
         String solution = WaterSortSearch.solve(grid2, "GR1", false);
         solution = solution.replace(" ", "")+";";
@@ -237,7 +236,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid2, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void teste3() throws Exception {
         String solution = WaterSortSearch.solve(grid3, "GR1", false);
         solution = solution.replace(" ", "")+";";
@@ -245,7 +244,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid3, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void teste4() throws Exception {
         String solution = WaterSortSearch.solve(grid4, "GR1", false);
         solution = solution.replace(" ", "")+";";
@@ -254,7 +253,7 @@ public class Tests {
     }
 
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testf0() throws Exception {
         String solution = WaterSortSearch.solve(grid0, "GR2", false);
         solution = solution.replace(" ", "")+";";
@@ -262,7 +261,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid0, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testf1() throws Exception {
         String solution = WaterSortSearch.solve(grid1, "GR2", false);
         solution = solution.replace(" ", "")+";";
@@ -270,7 +269,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid1, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testf2() throws Exception {
         String solution = WaterSortSearch.solve(grid2, "GR2", false);
         solution = solution.replace(" ", "")+";";
@@ -278,7 +277,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid2, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testf3() throws Exception {
         String solution = WaterSortSearch.solve(grid3, "GR2", false);
         solution = solution.replace(" ", "")+";";
@@ -286,7 +285,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid3, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testf4() throws Exception {
         String solution = WaterSortSearch.solve(grid4, "GR2", false);
         solution = solution.replace(" ", "")+";";
@@ -294,7 +293,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid4, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testg0() throws Exception {
         String solution = WaterSortSearch.solve(grid0, "AS1", false);
         solution = solution.replace(" ", "")+";";
@@ -302,7 +301,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid0, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testg1() throws Exception {
         String solution = WaterSortSearch.solve(grid1, "AS1", false);
         solution = solution.replace(" ", "")+";";
@@ -310,7 +309,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid1, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testg2() throws Exception {
         String solution = WaterSortSearch.solve(grid2, "AS1", false);
         solution = solution.replace(" ", "")+";";
@@ -319,7 +318,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid2, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void     testg3() throws Exception {
         String solution = WaterSortSearch.solve(grid3, "AS1", false);
         solution = solution.replace(" ", "")+";";
@@ -327,7 +326,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid3, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testg4() throws Exception {
         String solution = WaterSortSearch.solve(grid4, "AS1", false);
         solution = solution.replace(" ", "")+";";
@@ -336,7 +335,7 @@ public class Tests {
     }
 
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testh0() throws Exception {
         String solution = WaterSortSearch.solve(grid0, "AS2", false);
         solution = solution.replace(" ", "")+";";
@@ -344,7 +343,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid0, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testh1() throws Exception {
         String solution = WaterSortSearch.solve(grid1, "AS2", false);
         solution = solution.replace(" ", "")+";";
@@ -352,7 +351,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid1, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testh2() throws Exception {
         String solution = WaterSortSearch.solve(grid2, "AS2", false);
         solution = solution.replace(" ", "")+";";
@@ -361,7 +360,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid2, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testh3() throws Exception {
         String solution = WaterSortSearch.solve(grid3, "AS2", false);
         solution = solution.replace(" ", "")+";";
@@ -369,7 +368,7 @@ public class Tests {
         assertTrue("The output actions do not lead to a goal state.", pc.applyPlan(grid3, solution));
     }
 
-    @Test(timeout = 60000)
+    @org.junit.Test(timeout = 60000)
     public void testh4() throws Exception {
         String solution = WaterSortSearch.solve(grid4, "AS2", false);
         solution = solution.replace(" ", "")+";";
