@@ -1,4 +1,4 @@
-:- include("KB2.pl").
+:- include("Our_KB.pl").
 
 % Fluent 1: top_layer - Shows if a color is in the top layer of a bottle
 
@@ -247,8 +247,7 @@ generateSituation(S, S1) :-
 verifySituation(S):-
     top_layer(1, C1, S), bottom_layer(1, C1, S),
     top_layer(2, C2, S), bottom_layer(2, C2, S),
-    top_layer(3, C3, S), bottom_layer(3, C3, S),
-    C1\=C2, C1\=C3, C2\=C3.
+    top_layer(3, C3, S), bottom_layer(3, C3, S).
 
 goalHelper(S) :-
     (   var(S)
