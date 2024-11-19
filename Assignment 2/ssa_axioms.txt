@@ -1,0 +1,36 @@
+top(BottleNum, NewColor, S)
+effect axiom: (not top(BottleNum, NewColor,S))
+ - pour from another bottle to curr bottle and curr bottle has empty top and bottom is same color as NewColor and the bottle we pour from is not empty that it has NewColor at top or has empty top and bottom is NewColor
+
+ - if the top of a bottle needs to be empty in this situation then we pour from curr bottle to another bottle, the other bottle needs to have empty top and its bottom can be empty or have a color same as the color at the bottom of the curr bottle
+
+frame axiom: (top(BottleNum, NewColor,S))
+ - pour between 2 other bottles whether it was/was not successful
+
+ - pour from curr bottle to another bottle unsuccessfully (either the other bottle is full or has empty top but bottom of other color than NewColor)
+
+ - pour from other bottle to curr bottle unsuccessfully (curr bottle is full or other bottle is empty)
+
+
+-------------------------------------------------------------------------------
+
+bottom(BottleNum, NewColor, S)
+
+effect axiom: (not bottom(BottleNum, NewColor, S))
+ - curr bottle is empty and we pour from another bottle which is not empty and ((has NewColor at the top) or (the bottom is NewColor and its top is empty))
+
+ - if bottom of curr bottle needs to be empty in the new situation then we pour from curr bottle to another bottle. The curr bottle needs to have empty top 
+ and the other bottle needs to have empty top and its bottom can be empty or have a color same as the color at the bottom of the curr bottle
+
+
+
+frame axiom: (bottom(BottleNum, NewColor, S))
+ - pour between 2 other bottles whether it was/was not successful
+
+ - pour from curr bottle (if it has a top) to other bottle successfully that the top of curr bottle is of SomeColor and ((the other bottle is empty) or (has empty top and bottom of the same SomeColor))
+
+ - pour from curr bottle to other bottle unsuccessfully that (the other bottle is full) or (has empty top but bottom is of another Color than the one at the top of the curr bottle assuming it must has have a top of SomeColor)
+
+ - pour from other bottle to curr bottle successfully if curr bottle has empty top and knowing its bottom is Newcolor and the other bottle ((has a top of NewColor) or (an empty top and bottom of NewColor))
+
+ - pour from other bottle to curr bottle unsuccessfully if curr bottle is full or other bottle is empty or unsuccessful pouring by having different colors
