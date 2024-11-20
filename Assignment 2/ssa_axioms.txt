@@ -9,7 +9,7 @@ frame axiom: (top(BottleNum, NewColor,S))
 
  - pour from curr bottle to another bottle unsuccessfully (either the other bottle is full or has empty top but bottom of other color than NewColor)
 
- - pour from other bottle to curr bottle unsuccessfully (curr bottle is full or other bottle is empty)
+ - pour from other bottle to curr bottle unsuccessfully (curr bottle is full or other bottle is empty or have diff colors)
 
 
 -------------------------------------------------------------------------------
@@ -34,3 +34,4 @@ frame axiom: (bottom(BottleNum, NewColor, S))
  - pour from other bottle to curr bottle successfully if curr bottle has empty top and knowing its bottom is Newcolor and the other bottle ((has a top of NewColor) or (an empty top and bottom of NewColor))
 
  - pour from other bottle to curr bottle unsuccessfully if curr bottle is full or other bottle is empty or unsuccessful pouring by having different colors
+
