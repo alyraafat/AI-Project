@@ -329,3 +329,31 @@ measure_time_all_solutions(Goal, Solutions) :-
     TimeTaken is End - Start,
     length(Solutions, NumSolutions),
     format('Time taken: ~w ms for ~w solutions~n', [TimeTaken, NumSolutions]).
+
+% Measure call time for a goal
+measure_call_time(Goal) :-
+    call_time(Goal, Time),
+    format('Solution: ~w~n', [Goal]),
+    format('Inferences: ~D~n', [Time.inferences]),
+    format('CPU Time: ~3f seconds~n', [Time.cpu]),
+    format('Wall Time: ~3f seconds~n~n', [Time.wall]).
+
+% Measure call time for all solutions
+measure_call_time_all_solutions(Goal, Solutions) :-
+    call_time(findall(Goal, Goal, Solutions), Time),
+    length(Solutions, NumSolutions),
+    format('Found ~D solutions~n', [NumSolutions]),
+    format('Inferences: ~D~n', [Time.inferences]),
+    format('CPU Time: ~3f seconds~n', [Time.cpu]),
+    format('Wall Time: ~3f seconds~n', [Time.wall]).
+
+% Measure call time per solution
+measure_call_time_per_solution(Goal) :-
+    (   call_time(Goal, Time),
+        format('Solution: ~w~n', [Goal]),
+        format('Inferences: ~D~n', [Time.inferences]),
+        format('CPU Time: ~3f seconds~n', [Time.cpu]),
+        format('Wall Time: ~3f seconds~n~n', [Time.wall]),
+        fail
+    ;   true
+    ).
