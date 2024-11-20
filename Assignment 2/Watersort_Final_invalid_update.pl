@@ -111,7 +111,7 @@ top_layer(Source, e, S2) :- % when we pour from the source and our top is empty,
     ),
     Source \= Target, !.
 
-top_layer(Target, e, S2) :-
+top_layer(Target, e, S2) :- % I am the target and I am empty and the source bottle pours into me so my top remains empty still
     % writeln('Testing 5th Top layer'),
     S2 = result(Action, S),
     Action = pour(Source, Target),

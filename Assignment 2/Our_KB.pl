@@ -6,9 +6,9 @@
 % bottle2(b,r). 
 % bottle3(b,b). 
 
-% bottle1(r,r). 
-% bottle2(r,r).
-% bottle3(b,b).
+bottle1(r,r). 
+bottle2(r,r).
+bottle3(b,b).
 
 % bottle1(e,r). 
 % bottle2(b,r). 
@@ -49,6 +49,6 @@
 % bottle3(e,y).
 
 %% Sixth Colors (Only if it came solved)
-bottle1(g,g). 
-bottle2(r,g).
-bottle3(r,r).
+% bottle1(g,g). 
+% bottle2(r,g).
+% bottle3(r,r).
