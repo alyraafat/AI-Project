@@ -1,4 +1,4 @@
-:- include("KB.pl").
+:- include("Our_KB.pl").
 
 % Fluent 1: top_layer - Shows if a color is in the top layer of a bottle
 
@@ -34,6 +34,41 @@ possibleTopPourIfSource(Action, S) :-
     ),
     C \= e,
     Source \= Target.
+
+is_invalid_pour(Action, S):-
+    Action = pour(Source, Target),
+    (
+        ( % not empty target
+            Source \= Target,
+            top_layer(Target, Color1, S),
+            bottom_layer(Target, Color2, S),
+            Color1 \= e,
+            Color2 \= e
+        );
+        ( % pouring a color on a different color
+            Source \= Target,
+            top_layer(Target, e, S),
+            bottom_layer(Target, Color1, S),
+            Color1 \= e, 
+            (
+                top_layer(Source, Color2, S);
+                (
+                    bottom_layer(Source, Color2, S),
+                    top_layer(Source, e, S)
+                )
+            ),
+            Color2 \= e,
+            Color2 \= Color1
+        );
+        ( 
+            Source \= Target,
+            top_layer(Source, e, S),
+            bottom_layer(Source, e, S)
+        );
+        (
+            Source = Target
+        )
+    ).
 
 %% Initial States bottles 
 top_layer(1, T, s0) :- bottle1(T, _).
@@ -92,92 +127,23 @@ top_layer(Target, e, S2) :-
     C\=e,
     Source\=Target, !.
 
-%% unsuccessful/invalid pours
-top_layer(Source, Color, S2) :- % I am the source but empty or target is full or not empty and pouring a diff color than the target so I will stay as is in new situation or pouring into myself
-    % writeln('Testing 6th Top'),
-    S2 = result(Action, S),
-    Action = pour(Source, Target),
-    (
-        (
-            top_layer(Source, e, S),
-            bottom_layer(Source, e, S),
-            Color=e,
-            Source\=Target
-        );
-        (
-            top_layer(Target, SomeColor1, S),
-            bottom_layer(Target, SomeColor2, S),
-            SomeColor1\=e,
-            SomeColor2\=e,
-            top_layer(Source, Color, S),
-            Source\=Target
-        );
-        (
-            (
-                top_layer(Source, Color, S);
-                (
-                    bottom_layer(Source, Color, S),
-                    top_layer(Source, e, S),
-                    Color=e
-                )
-            ),
-            bottom_layer(Target, OtherColor, S),
-            top_layer(Target, e, S),
-            OtherColor\=Color,
-            OtherColor\=e,
-            Source\=Target
-        );
-        (
-            Source = Target,
-            top_layer(Source, Color, S)
-        )
-    ), !.
 
-top_layer(Target, Color, S2):- % I am the target and I will stay as is in the new situation due to invalid pouring like I am full or the target is empty or pouring diff colors or pouring into myself
-    % writeln('Testing 7th Top'),
+
+%% unsuccessful/invalid pours
+top_layer(Target, Color, S2):-
+    % writeln('Testing 6th Top Layer')
     S2 = result(Action, S),
     Action = pour(Source, Target),
-    (
-        (
-            top_layer(Target, Color, S),
-            bottom_layer(Target, SomeColor, S),
-            Color\=e,
-            SomeColor\=e,
-            Source\=Target
-        );
-        (
-            top_layer(Source, e, S),
-            bottom_layer(Source, e, S),
-            top_layer(Target, Color, S),
-            Source\=Target
-        );
-        (
-            (
-                (
-                    top_layer(Source, OtherColor1, S),
-                    OtherColor1\=Color,
-                    OtherColor1\=e
-                );
-                (
-                    top_layer(Source, e, S),
-                    bottom_layer(Source, OtherColor2, S),
-                    OtherColor2\=Color,
-                    OtherColor2\=e
-                ) 
-            ),
-            % I already checked for target being full so just assume top must be empty for the current case to work
-            top_layer(Target, e, S),
-            bottom_layer(Target, SomeColor, S),
-            SomeColor\=e,
-            Color=e,
-            Source\=Target
-        );
-        (
-            Source = Target,
-            top_layer(Target, Color, S)
-        )
-    ), !.
-    
+    is_invalid_pour(Action, S),
+    top_layer(Target, Color, S), !.
+
+top_layer(Source, Color, S2):-
+    % writeln('Testing 7th Top Layer')
+    S2 = result(Action, S),
+    Action = pour(Source, Target),
+    is_invalid_pour(Action, S),
+    top_layer(Source, Color, S), !.
+
 top_layer(Bottle, Color, S2) :- % test when we pour same bottle to itself
     % writeln('Testing 8th Top layer'),
     S2 = result(Action, S),
@@ -274,93 +240,17 @@ bottom_layer(Target, NewColor, S2):- % I am the target and i have a bottom but m
     Source \= Target,!.
 
 %% the unsuccessful/invalid pours
-bottom_layer(Source, Color, S2):- % I am the source and will remain as is in the new situation as I am pouring into myself or I am empty or the target is full or because I must have a top of someColor and the target has empty top and bottom of other color
-    % writeln('Testing 6th bottom layer'),
+bottom_layer(Source, Color, S2):-
     S2 = result(Action, S),
     Action = pour(Source, Target),
-    (
-        (
-            top_layer(Source, e, S),
-            bottom_layer(Source, e, S),
-            Color = e,
-            Source\=Target
-        );
-        (
-            top_layer(Target, SomeColor1, S),
-            bottom_layer(Target, SomeColor2, S),
-            SomeColor1\=e,
-            SomeColor2\=e,
-            bottom_layer(Source, Color, S),
-            Source\=Target
-        );
-        (
-            top_layer(Target, e, S),
-            bottom_layer(Target, OtherColor, S),
-            OtherColor\= e,
-            bottom_layer(Source, Color, S),
-            (
-                (
-                    top_layer(Source, SomeColor, S),
-                    SomeColor\=e,
-                    OtherColor\=SomeColor
-                );
-                (
-                    top_layer(Source, e, S),
-                    OtherColor\=Color
-                )
-            ),
-            Source\=Target
-        );
-        (
-            Source = Target,
-            bottom_layer(Source, Color, S)
-        )
-    ), !.
-    
+    is_invalid_pour(Action, S),
+    bottom_layer(Source, Color, S), !.
 
-bottom_layer(Target, Color, S2):- % I am target and will remain as is in new situation due to invalid pours which are pouring into myself or I am full or source is empty or pouring diff colors but I must have empty top only
-    % writeln('Testing 7th bottom layer'),
+bottom_layer(Target, Color, S2):-
     S2 = result(Action, S),
     Action = pour(Source, Target),
-    (
-        (
-            top_layer(Target, SomeColor, S),
-            bottom_layer(Target, Color, S),
-            Color\=e,
-            SomeColor\=e,
-            Source\=Target
-        );
-        (
-            top_layer(Source, e, S),
-            bottom_layer(Source, e, S),
-            bottom_layer(Target, Color, S), 
-            Source\=Target
-        );
-        (
-            (
-                (
-                    top_layer(Source, OtherColor1, S),
-                    bottom_layer(Source, SomeColor, S),
-                    OtherColor1\=Color,
-                    OtherColor1\=e,
-                    SomeColor\=e
-                );
-                (
-                    top_layer(Source, e, S),
-                    bottom_layer(Source, OtherColor2, S),
-                    OtherColor2\=Color,
-                    OtherColor2\=e
-                )
-            ),
-            top_layer(Target, e, S),
-            bottom_layer(Target, Color, S),
-            Source\=Target
-        );
-        (
-            Source = Target,
-            bottom_layer(Target, Color, S)
-        )
-    ), !.
+    is_invalid_pour(Action, S),
+    bottom_layer(Target, Color, S), !.
 
 bottom_layer(Bottle, Color, S2) :- % 2 same bottles so remain as is
     % writeln('Testing 8th bottom layer'),
@@ -388,12 +278,12 @@ verifyAllSituations([], _) :- fail.
 
 
 verifyAllSituations([S|_], S1):-
-    % writeln(['S',S]),
+    %%writeln(['S',S]),
     verifySituation(S),
     S1 = S.
 
 verifyAllSituations([_|T], S1):-
-    % writeln(['S1', S1]),
+    %%writeln(['S1', S1]),
     verifyAllSituations(T, S1).
 
 
@@ -408,7 +298,7 @@ verifySituation(S):-
     top_layer(1, C1, S), bottom_layer(1, C1, S),
     top_layer(2, C2, S), bottom_layer(2, C2, S),
     top_layer(3, C3, S), bottom_layer(3, C3, S).
-    % writeln([C1,C2,C3]).
+    %%writeln([C1,C2,C3]).
 
 goalHelper(S) :-
     (   var(S)
