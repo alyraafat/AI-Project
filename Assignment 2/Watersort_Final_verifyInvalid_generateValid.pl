@@ -226,7 +226,7 @@ bottom_layer(Target, NewColor, S2, IsGenerate):- % I am the target and i have a 
     (
         top_layer(Source, NewColor, S, IsGenerate);
         (
-            top_layer(Source, e, S, IsGenerate);
+            top_layer(Source, e, S, IsGenerate),
             bottom_layer(Source, NewColor, S, IsGenerate)
         )
     ),
@@ -266,10 +266,7 @@ createNewSituations([S|T1], NewSituationsAll):-
     Situation4 = result(pour(3,1), S),
     Situation5 = result(pour(2,3), S),
     Situation6 = result(pour(3,2), S),
-    Situation7 = result(pour(1,1), S),
-    Situation8 = result(pour(2,2), S),
-    Situation9 = result(pour(3,3), S),
-    NewSituations = [Situation1, Situation2, Situation3, Situation4, Situation5, Situation6, Situation7, Situation8, Situation9],
+    NewSituations = [Situation1, Situation2, Situation3, Situation4, Situation5, Situation6],
     createNewSituations(T1, NewSituationsRest),
     append(NewSituationsRest, NewSituations, NewSituationsAll).
 

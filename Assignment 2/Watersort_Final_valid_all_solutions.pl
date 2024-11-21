@@ -165,7 +165,7 @@ bottom_layer(Target, NewColor, S2):- % I am the target and i have a bottom but m
     (
         top_layer(Source, NewColor, S);
         (
-            top_layer(Source, e, S);
+            top_layer(Source, e, S),
             bottom_layer(Source, NewColor, S)
         )
     ),

@@ -223,14 +223,14 @@ bottom_layer(Source, NewColor, S2):- % I am the source and I have a top layer wh
     bottom_layer(Source, NewColor, S), !.
 
     
-bottom_layer(Target, NewColor, S2):- % I am the target and i have a bottom but my top is empty and needs to be filled with anothe non empty bottle having same Color at top or bottom if top is empty
+bottom_layer(Target, NewColor, S2):- % I am the target and i have a bottom but my top is empty and needs to be filled with another non empty bottle having same Color at top or bottom if top is empty
     % writeln('Testing 5th bottom layer'),
     S2 = result(Action, S),
     Action = pour(Source, Target),
     (
         top_layer(Source, NewColor, S);
         (
-            top_layer(Source, e, S);
+            top_layer(Source, e, S),
             bottom_layer(Source, NewColor, S)
         )
     ),
