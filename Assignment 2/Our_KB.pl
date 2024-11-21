@@ -6,9 +6,9 @@
 % bottle2(b,r). 
 % bottle3(b,b). 
 
-bottle1(r,r). 
-bottle2(r,r).
-bottle3(b,b).
+% bottle1(r,r). 
+% bottle2(r,r).
+% bottle3(b,b).
 
 % bottle1(e,r). 
 % bottle2(b,r). 
@@ -17,6 +17,14 @@ bottle3(b,b).
 % bottle1(e,r). 
 % bottle2(b,r).
 % bottle3(e,e).
+
+% bottle1(r,b). 
+% bottle2(e,r).
+% bottle3(e,b).
+
+bottle1(r,b). 
+bottle2(b,r).
+bottle3(e,e).
 
 %% One Color
 % bottle1(e,e). 

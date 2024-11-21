@@ -1,4 +1,4 @@
-:- include("KB.pl").
+:- include("Our_KB.pl").
 
 % Fluent 1: top_layer - Shows if a color is in the top layer of a bottle
 
