@@ -335,7 +335,7 @@ measure_call_time(Goal) :-
     format('CPU Time: ~3f seconds~n', [Time.cpu]),
     format('Wall Time: ~3f seconds~n~n', [Time.wall]).
 
-measure_call_time(Goal) :-
+measure_call_time_wrong(Goal) :-
     call_time(\+Goal, Time),
     format('Solution: ~w~n', [Goal]),
     format('Inferences: ~D~n', [Time.inferences]),
