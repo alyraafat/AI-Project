@@ -22,9 +22,13 @@
 % bottle2(e,r).
 % bottle3(e,b).
 
+bottle1(r,b). 
+bottle2(b,r).
+bottle3(e,e).
+
 % bottle1(r,b). 
-% bottle2(b,r).
-% bottle3(e,e).
+% bottle2(e,r).
+% bottle3(e,b).
 
 %% One Color
 % bottle1(e,e). 
@@ -65,6 +69,6 @@
 % bottle2(g,g).
 % bottle3(r,r).
 
-bottle1(g,g). 
-bottle2(e,v).
-bottle3(e,v).
+% bottle1(g,g). 
+% bottle2(e,v).
+% bottle3(e,v).

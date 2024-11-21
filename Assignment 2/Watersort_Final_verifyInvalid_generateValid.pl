@@ -1,4 +1,4 @@
-:- include("Our_KB.pl").
+:- include("KB2.pl").
 
 % Fluent 1: top_layer - Shows if a color is in the top layer of a bottle
 
@@ -330,6 +330,13 @@ measure_time_all_solutions(Goal, Solutions) :-
 % Measure call time for a goal
 measure_call_time(Goal) :-
     call_time(Goal, Time),
+    format('Solution: ~w~n', [Goal]),
+    format('Inferences: ~D~n', [Time.inferences]),
+    format('CPU Time: ~3f seconds~n', [Time.cpu]),
+    format('Wall Time: ~3f seconds~n~n', [Time.wall]).
+
+measure_call_time(Goal) :-
+    call_time(\+Goal, Time),
     format('Solution: ~w~n', [Goal]),
     format('Inferences: ~D~n', [Time.inferences]),
     format('CPU Time: ~3f seconds~n', [Time.cpu]),

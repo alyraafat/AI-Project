@@ -26,17 +26,17 @@ This report outlines the fluents used to represent the system state, the success
 
 To represent the dynamic state of the Watersort problem, two fluents were used:
 
-1. **top_layer(Bottle, Color, Situation)**
+1. **top_layer(Bottle, Color, Situation, IsGenerate)**
 
-2. **bottom_layer(Bottle, Color, Situation)**
+2. **bottom_layer(Bottle, Color, Situation, IsGenerate)**
 
-These fluents encapsulate the state of the liquid layers in the bottles at any given situation. The **top_layer** fluent indicates the color of the liquid present in the top layer of a specific bottle in a particular situation, while the **bottom_layer** fluent serves a similar purpose for the bottom layer. Both fluents play a critical role in defining the initial state, representing transitions caused by actions, and determining if the goal state has been reached.
-
-To compose the successor state axioms for each of our fluents, the effect and frame axioms are defined as follows
+These fluents encapsulate the state of the liquid layers in the bottles at any given situation. The **top_layer** fluent indicates the color of the liquid present (**Color)** in the top layer of a specific bottle (**Bottle**) in a particular situation (**Situation**), while the **bottom_layer** fluent serves a similar purpose for the bottom layer for each bottle. Both fluents play a critical role in defining the initial state, representing transitions caused by actions, and determining if the goal state has been reached. We added an argument called `IsGenerate` to the `top_layer` and `bottom_layer` fluents just for code purposes. Its purpose is to distinguish whether we are generating plans that include only valid pours. When `IsGenerate` is false, we ensure that only the predicates handling valid pour cases are used to generate plans with valid pours. This allows us to exclude predicates that call `is_invalid_pour` or handle scenarios where another bottle is poured into itself, ensuring that the generated plans consist solely of valid actions.
 
 **_Top_layer Fluent:_**
 
-**\_**_![{"aid":null,"backgroundColorModified":false,"font":{"size":23,"family":"Arial","color":"#000000"},"code":"\\begin{lalign\*}\n&{\\forall_{a,b,c,s}\\,\\text{top\\_layer(b,}\\;\\text{c,}\\;\\text{result(a,}\\;\\text{s))}\\;\\iff\\,}\\\\\n&{\\exists_{b2}\\,a\\,=\\,\\text{pour(b2,}\\;\\text{b)}\\;\\land\\,b\\,\\neq\\,b2\\,\\land\\,c\\,\\neq\\,e\\;\\land\\,\\,\\text{[}\\text{top\\_layer(b2,}\\;\\text{c,}\\;\\text{s}\\text{)}\\;\\lor\\,\\left(\\text{bottom\\_layer(b2,}\\;\\text{c,}\\;\\text{s}\\text{)}\\;\\land\\,\\text{top\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\,\\right)\\text{]}\\;\\land \\text{top\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\,\\land\\,\\text{bottom\\\_layer(b,}\\;\\text{c,}\\;\\text{s}\\text{)}}\\\\\n&{\\lor\\,\\exists_{b2,\\,c2}\\,a\\,=\\,\\text{pour(b,}\\;\\text{b2)}\\;\\land\\,b\\,\\neq b2\\,\\land c\\,=e\\,\\land\\,\\text{top\\_layer(b,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\,\\land\\,\\text{top\\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\land\\,\\,\\left[\\text{bottom\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\lor\\,\\text{bottom\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\right]}\\\\\n&{\\lor\\,\\exists_{b2,\\,b3\\,}a\\,=\\,\\text{pour(b2,}\\;\\text{b3)}\\,\\land \\,b\\,\\neq b2\\,\\land b\\,\\neq b3}\\\\\n&{\\lor\\,\\exists*{b2,\\,c2}\\,a\\,=\\,\\text{pour(b,}\\;\\text{b2)}\\,\\land \\,b\\,\\neq b2\\,\\land c\\,=\\,e\\,\\land\\,\\text{top\\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\land\\,\\text{bottom\\\_layer(b,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\land c2\\,\\neq e\\,\\land\\text{top\\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\,\\land\\,\\left[\\text{bottom\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\lor\\,\\text{bottom\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\right]}\\\\\n&{\\lor\\,\\exists*{b2,\\,c2}\\,a\\,=\\,\\text{pour(b2,}\\;\\text{b)}\\,\\land \\,b\\,\\neq b2\\,\\land c\\,=\\,e\\,\\,\\land\\,\\text{top\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\,\\land\\text{bottom\\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\land\\,\\left[\\text{top\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\lor\\,\\left(\\text{bottom\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\land\\,\\text{top\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\right)\\right]\\,\\land c2\\,\\neq e\\,}\t\n\\end{lalign*}","type":"lalign*","id":"1-0","backgroundColor":"#ffffff","ts":1732210408838,"cs":"v5iCEC16SY/3zeTOhQjYuQ==","size":{"width":698,"height":138}}](https://lh7-rt.googleusercontent.com/docsz/AD_4nXel4XoXfnHWeWUB4xVea3ltTMmYP5Gx5hhmTI845tUOIOqznCcTyKCpLt9fX0bWABIRi1_qLRG_VGVYWkaywndWwb0dVwNrfmOYN6FOX0JADiamIF9pfQHiBBrhXsSC00qdcFvDaQ?key=BTAzTMApYNbLRfQzEQn5zw)_**\_**
+_Successor State Axioms:_
+
+**\_**_![{"backgroundColorModified":false,"aid":null,"font":{"color":"#000000","family":"Arial","size":12.5},"backgroundColor":"#ffffff","code":"\\begin{lalign\*}\n&{\\forall_{a,b,c,s}\\,\\text{top\\_layer(b,}\\;\\text{c,}\\;\\text{result(a,}\\;\\text{s))}\\;\\iff\\,}\\\\\n&{\\exists_{b2}\\,a\\,=\\,\\text{pour(b2,}\\;\\text{b)}\\;\\land\\,b\\,\\neq\\,b2\\,\\land\\,c\\,\\neq\\,e\\;\\land\\,\\,\\text{[}\\text{top\\_layer(b2,}\\;\\text{c,}\\;\\text{s}\\text{)}\\;\\lor\\,\\left(\\text{bottom\\_layer(b2,}\\;\\text{c,}\\;\\text{s}\\text{)}\\;\\land\\,\\text{top\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\,\\right)\\text{]}\\;\\land \\text{top\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\,\\land\\,\\text{bottom\\\_layer(b,}\\;\\text{c,}\\;\\text{s}\\text{)}}\\\\\n&{\\lor\\,\\exists_{b2,\\,c2}\\,a\\,=\\,\\text{pour(b,}\\;\\text{b2)}\\;\\land\\,b\\,\\neq b2\\,\\land c\\,=e\\,\\land c2\\,\\neq e\\,\\land\\,\\text{top\\_layer(b,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\,\\land\\,\\text{top\\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\land\\,\\,\\left[\\text{bottom\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\lor\\,\\text{bottom\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\right]}\\\\\n&{\\lor\\,\\text{top\\\_layer(b,}\\;\\text{c,}\\;\\text{s}\\text{)}\\;\\land\\,\\,(}\\\\\n&{\\lor\\,\\exists_{b2,\\,b3\\,}a\\,=\\,\\text{pour(b2,}\\;\\text{b3)}\\,\\land \\,b\\,\\neq b2\\,\\land b\\,\\neq b3\\,\\land b2\\,\\neq b3}\\\\\n&{\\lor\\,\\exists*{b2,\\,c2}\\,a\\,=\\,\\text{pour(b,}\\;\\text{b2)}\\,\\land \\,b\\,\\neq b2\\,\\land c\\,=\\,e\\;\\land\\,\\text{bottom\\\_layer(b,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\land c2\\,\\neq e\\,\\land\\text{top\\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\,\\land\\,\\left[\\text{bottom\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\lor\\,\\text{bottom\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\right]}\\\\\n&{\\lor\\,\\exists*{b2,\\,c2}\\,a\\,=\\,\\text{pour(b2,}\\;\\text{b)}\\,\\land \\,b\\,\\neq b2\\,\\land c\\,=\\,e\\,\\,\\land\\text{bottom\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\land\\,\\left[\\text{top\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\lor\\,\\left(\\text{bottom\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\land\\,\\text{top\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\right)\\right]\\,\\land c2\\,\\neq e}\\\\\n&{)}\t\n\\end{lalign*}","type":"lalign*","id":"1-0","ts":1732214478242,"cs":"aMbktbxNXpn/RAmOBtYyxw==","size":{"width":708,"height":206}}](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfjj87ontUDEsoRd3Gf9RnZIcZrUhVrMK_R79PCy8-I1CnZk_lm5E4gHyHGX_Pouwd4ikKvrpcsw3x2ojwcZgOVBWUTyqR6u9_7xX2gnpfNLBhmK3GTFyj96colonHqedF4wb7G?key=BTAzTMApYNbLRfQzEQn5zw)_**\_**
 
 Base Cases for **top_laye**r Fluent:
 
@@ -50,7 +50,9 @@ Effect Axioms for **top_laye**r Fluent:
 
 The **top_layer** fluent describes the color present in the top layer of a bottle in a given situation. Its behavior is governed by the following two effect axioms, which detail how the **top_layer** of bottles changes as a result of the **pour(Source, Target)** action:
 
-1\. Adding a New Top Color to the Target Bottle
+1\. Adding a New Top Color to the Target Bottle \*\*\*\*
+
+\*\*\*\*
 
 If a target bottle has no top layer and is poured into, the new color added to its top will be the color being poured from the source bottle. This happens under the following conditions:
 
@@ -106,7 +108,7 @@ If a source bottle pours from its bottom layer, its top layer remains empty. Thi
 
 3\. Pouring into an Empty Target Bottle
 
-When a source bottle pours into an empty target bottle, the \`top_layer\` of the target remains empty if:
+When a source bottle pours into an empty target bottle, the **top_layer** of the target remains empty if:
 
 - The bottom_layer of the target is empty.
 
@@ -118,7 +120,7 @@ When a source bottle pours into an empty target bottle, the \`top_layer\` of the
 
   - An empty top_layer and a bottom_layer of color **C**.
 
-- The source and target bottles are not the same..
+- The source and target bottles are not the same.
 
 4\. Doing Invalid Pours
 
@@ -144,7 +146,7 @@ Invalid pours are defined as actions that do not follow the rules for pouring li
 
    - The source and target bottles are the same, which is an invalid action since no actual pouring occurs.
 
-We defined a predicate called `is_invalid_pour`, which incorporates the rules for invalid pouring outlined earlier. Subsequently, we created two `top_layer` predicates that utilize the `is_invalid_pour` predicate, with the bottle functioning as the source in one case and as the target in the other. Additionally, we addressed the scenario where a bottle is poured into itself while referencing another bottle in the `top_layer` predicate.
+We defined a predicate called `is_invalid_pour`, which incorporates the rules for invalid pouring outlined earlier. Subsequently, we created two `top_layer` predicates that utilize the `is_invalid_pour` predicate, with the bottle functioning as the source in one case and as the target in the other. Additionally, we addressed the scenario where a bottle is poured into itself while referencing another bottle in the `top_layer` predicate. All the aforementioned 3 predicates are not used during the generation of a plan to avoid including invalid actions.
 
 These frame axioms ensure that the top_layer of a bottle remains consistent in scenarios where it is not directly affected by the pour action, thus maintaining logical integrity in the system
 
@@ -152,9 +154,9 @@ These frame axioms ensure that the top_layer of a bottle remains consistent in s
 
 **_Bottom_layer Fluent:_**
 
-**\_**_![{"aid":null,"backgroundColorModified":false,"font":{"size":11.5,"family":"Arial","color":"#000000"},"code":"\\begin{lalign\*}\n&{\\forall_{a,b,c,s}\\,\\text{top\\_layer(b,}\\;\\text{c,}\\;\\text{result(a,}\\;\\text{s))}\\;\\iff\\,}\\\\\n&{\\exists_{b2}\\,a\\,=\\,\\text{pour(b2,}\\;\\text{b)}\\;\\land\\,b\\,\\neq\\,b2\\,\\land\\,c\\,\\neq\\,e\\;\\land\\,\\,\\text{[}\\text{top\\_layer(b2,}\\;\\text{c,}\\;\\text{s}\\text{)}\\;\\lor\\,\\left(\\text{bottom\\_layer(b2,}\\;\\text{c,}\\;\\text{s}\\text{)}\\;\\land\\,\\text{top\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\,\\right)\\text{]}\\;\\land \\text{top\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\,\\land\\,\\text{bottom\\\_layer(b,}\\;\\text{c,}\\;\\text{s}\\text{)}}\\\\\n&{\\lor\\,\\exists_{b2,\\,c2}\\,a\\,=\\,\\text{pour(b,}\\;\\text{b2)}\\;\\land\\,b\\,\\neq b2\\,\\land c\\,=e\\,\\land\\,\\text{top\\_layer(b,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\,\\land\\,\\text{top\\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\land\\,\\,\\left[\\text{bottom\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\lor\\,\\text{bottom\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\right]}\\\\\n&{\\lor\\,\\exists_{b2,\\,b3\\,}a\\,=\\,\\text{pour(b2,}\\;\\text{b3)}\\,\\land \\,b\\,\\neq b2\\,\\land b\\,\\neq b3}\\\\\n&{\\lor\\,\\exists*{b2,\\,c2}\\,a\\,=\\,\\text{pour(b,}\\;\\text{b2)}\\,\\land \\,b\\,\\neq b2\\,\\land c\\,=\\,e\\,\\land\\,\\text{top\\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\land\\,\\text{bottom\\\_layer(b,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\land c2\\,\\neq e\\,\\land\\text{top\\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\,\\land\\,\\left[\\text{bottom\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\lor\\,\\text{bottom\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\right]}\\\\\n&{\\lor\\,\\exists*{b2,\\,c2}\\,a\\,=\\,\\text{pour(b2,}\\;\\text{b)}\\,\\land \\,b\\,\\neq b2\\,\\land c\\,=\\,e\\,\\,\\land\\,\\text{top\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\,\\land\\text{bottom\\\_layer(b,}\\;\\text{e,}\\;\\text{s}\\text{)}\\;\\land\\,\\left[\\text{top\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\lor\\,\\left(\\text{bottom\\_layer(b2,}\\;\\text{c2,}\\;\\text{s}\\text{)}\\;\\land\\,\\text{top\\_layer(b2,}\\;\\text{e,}\\;\\text{s}\\text{)}\\right)\\right]\\,\\land c2\\,\\neq e\\,}\t\n\\end{lalign*}","type":"lalign*","id":"1-1","backgroundColor":"#ffffff","ts":1732210539757,"cs":"jRpv4XaGRSTfJ9a91ymZmg==","size":{"width":697,"height":138}}](https://lh7-rt.googleusercontent.com/docsz/AD_4nXel4XoXfnHWeWUB4xVea3ltTMmYP5Gx5hhmTI845tUOIOqznCcTyKCpLt9fX0bWABIRi1_qLRG_VGVYWkaywndWwb0dVwNrfmOYN6FOX0JADiamIF9pfQHiBBrhXsSC00qdcFvDaQ?key=BTAzTMApYNbLRfQzEQn5zw)_**\_**
+_Successor State Axioms:_
 
-Base Cases for **bottom_laye**r Fluent:
+Base Cases for **bottom_layer** Fluent:
 
 - `bottom_layer(1, B, s0, _)`: For **bottle 1**, the bottom layer's color (`B`) is taken from the second element in `bottle1(_, B)`.
 
@@ -178,7 +180,7 @@ When a source bottle pours into an empty target bottle, the bottom layer of the 
 
   - An empty top_layer and a bottom_layer of color **C**.
 
-  - The source and target bottles are not the same.
+- The source and target bottles are not the same.
 
 2\. Emptying the Bottom Layer of the Source Bottle
 
@@ -232,15 +234,35 @@ When a source bottle pours into a target bottle, the bottom_layer of the target 
 
 4\. Doing Invalid Pours
 
-We created two `bottom_layer` predicates that utilize the `is_invalid_pour` predicate which we mentioned before, with the bottle functioning as the source in one case and as the target in the other. Additionally, we addressed the scenario where a bottle is poured into itself while referencing another bottle in the `bottom_layer` predicate.
+We created two `bottom_layer` predicates that utilize the `is_invalid_pour` predicate which we mentioned before, with the bottle functioning as the source in one case and as the target in the other. Additionally, we addressed the scenario where a bottle is poured into itself while referencing another bottle in the `bottom_layer` predicate.  All the aforementioned 3 predicates are not used during the generation of a plan to avoid including invalid actions.
 
 These frame axioms ensure that the `bottom_layer` of a bottle remains consistent in scenarios where it is not directly affected by the pour action, thus maintaining logical integrity in the system
 
 ---
 
+The technique used in this project to output solutions is that it determines whether the input `S` is an uninstantiated variable or already has a value, and it handles each case differently:
+
+1. **If** `S` **is a variable (not yet defined)**:
+
+   - This means we are trying to generate a solution from scratch.
+
+   - The process starts by creating all possible situations starting from the initial state (`s0`). These situations are generated by simulating all possible pouring actions (valid or invalid) between the bottles.
+
+   - Each newly generated situation is then **verified** to check if it satisfies the goal conditions (each bottle has one color and completely filled or is empty).
+
+   - If a valid situation that satisfies the goal and has does not include any invalid actions is found, it is assigned to `S`.
+
+2. **If** `S` **is not a variable (already defined)**:
+
+   - This means we are checking if the given situation `S` meets the goal conditions whether it includes valid or invalid actions.
+
+   - The function directly verifies whether `S` is valid and satisfies the requirements of the goal, without generating new situations.
+
+---
+
 **Test Cases:**
 
-1. **Test Case 1:**
+**1. Test Case 1:**
 
 - KB is as follows:
 
@@ -258,7 +280,7 @@ These frame axioms ensure that the `bottom_layer` of a bottle remains consistent
 
 - Wall Time: 0.003 seconds
 
-2. **Test Case 2:**
+**2. Test Case 2:**
 
 - KB is as follows:
 
@@ -278,7 +300,7 @@ goal(result(pour(2,3),result(pour(2,1),result(pour(1,3),s0))))
 
 - Wall Time: 0.007 seconds
 
-3. **Test Case 3:**
+**3. Test Case 3:**
 
 - KB is as follows:
 
@@ -298,7 +320,7 @@ goal(result(pour(3,2),result(pour(2,1),result(pour(1,3),s0))))
 
 - Wall Time: 0.001 seconds
 
-4. **Test Case 4:**
+**4. Test Case 4:**
 
 - KB is as follows:
 
@@ -318,7 +340,7 @@ goal(result(pour(2,3),s0))
 
 - Wall Time: 0.003 seconds
 
-5. **Test Case 5:**
+**5. Test Case 5:**
 
 - KB is as follows:
 
